@@ -1,0 +1,6 @@
+.DS_Store
+/bin
+/install
+/vendor
+/node_modules
+/build

@@ -1,0 +1,29 @@
+{
+  "name": "ifttt-instagram-gallery",
+  "version": "1.0.0",
+  "description": "When using IFTTT with WordPress you can just post new posts. This plugin helps you to do whatever you like. Configure your IFTTT job in a predefined way in you get any information you like in a WordPress action.",
+  "main": "index.js",
+  "scripts": {
+    "test": "bin/behat"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bjoerne2/ifttt-instagram-gallery.git"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin"
+  ],
+  "author": "Björn Weinbrenner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bjoerne2/ifttt-instagram-gallery/issues"
+  },
+  "homepage": "https://github.com/bjoerne2/ifttt-instagram-gallery",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-pot": "~0.1.2",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-text-replace": "~0.3.11"
+  }
+}

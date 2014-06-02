@@ -62,6 +62,7 @@ class Ifttt_Instagram_Gallery {
 	private function __construct() {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_action( 'ifttt_wordpress_bridge', array( $this, 'load_instagram_image' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 	}
 
 	/**
@@ -167,6 +168,15 @@ class Ifttt_Instagram_Gallery {
 	}
 
 	/**
+	 * Register and enqueue public-facing style sheet.
+	 *
+	 * @since    1.0.0
+	 */
+	public function enqueue_styles() {
+		wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/public.css', __FILE__ ), array(), self::VERSION );
+	}
+
+	/**
 	 * Displays the instagram images.
 	 *
 	 * @since   1.0.0
@@ -177,7 +187,6 @@ class Ifttt_Instagram_Gallery {
 			'post_type' => 'attachment',
 			'post_status' => 'inherit',
 			'posts_per_page' => -1,
-			'orderby' => 'DESC',
 		);
 		$query = new WP_Query( $query_args );
 		$ids   = array();

@@ -1,0 +1,14 @@
+ul.ifttt-instagram-image-list {
+  list-style: none;
+  padding: 0;
+}
+ul.ifttt-instagram-image-list li {
+  float: left;  
+  margin: 0 1px 1px 0;
+}
+ul.ifttt-instagram-image-list img {
+  display: block;
+  width: 80px;
+  border-radius: 0;
+  box-shadow: none;
+}

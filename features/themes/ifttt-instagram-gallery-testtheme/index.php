@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>IFTTT Instagram Gallery Test Theme</title>
+  <?php wp_head(); ?>
 </head>
 <body>
 <div>

@@ -1,14 +1,73 @@
-ul.ifttt-instagram-image-list {
+.ifttt-instagram-images ul {
   list-style: none;
   padding: 0;
 }
-ul.ifttt-instagram-image-list li {
+.ifttt-instagram-images li {
   float: left;  
   margin: 0 1px 1px 0;
 }
-ul.ifttt-instagram-image-list img {
+.ifttt-instagram-images img {
   display: block;
-  width: 80px;
   border-radius: 0;
   box-shadow: none;
+  width: 100%;
 }
+.ifttt-instagram-1-per-row li {
+  width: 98%;
+}
+.ifttt-instagram-2-per-row li {
+  width: 49%;
+}
+.ifttt-instagram-3-per-row li {
+  width: 32.6666666666667%;
+}
+.ifttt-instagram-4-per-row li {
+  width: 24.5%;
+}
+.ifttt-instagram-5-per-row li {
+  width: 19.6%;
+}
+.ifttt-instagram-6-per-row li {
+  width: 16.3333333333333%;
+}
+.ifttt-instagram-7-per-row li {
+  width: 14%;
+}
+.ifttt-instagram-8-per-row li {
+  width: 12.25%;
+}
+.ifttt-instagram-9-per-row li {
+  width: 10.8888888888889%;
+}
+.ifttt-instagram-10-per-row li {
+  width: 9.8%;
+}
+.ifttt-instagram-11-per-row li {
+  width: 8.90909090909091%;
+}
+.ifttt-instagram-12-per-row li {
+  width: 8.16666666666667%;
+}
+.ifttt-instagram-13-per-row li {
+  width: 7.53%;
+}
+.ifttt-instagram-14-per-row li {
+  width: 7%;
+}
+.ifttt-instagram-15-per-row li {
+  width: 6.53%;
+}
+.ifttt-instagram-16-per-row li {
+  width: 6.125%;
+}
+.ifttt-instagram-17-per-row li {
+  width: 5.76%;
+}
+.ifttt-instagram-18-per-row li {
+  width: 5.44%;
+}
+.ifttt-instagram-19-per-row li {
+  width: 5.15%;
+}
+.ifttt-instagram-20-per-row li {
+  width: 4.8%;

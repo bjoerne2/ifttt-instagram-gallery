@@ -88,15 +88,55 @@ trait ManualWordPressSteps {
 	}
 
 	/**
-	 * @Given /I should see images in section "([^"]*)"$/
+	 * @Given /I should see images in section "([^"]*)" with titles$/
 	 */
-	public function assert_images_in_section( $heading, $table ) {
+	public function assert_image_titles_in_section( $heading, $table ) {
 		$rows   = $table->getRows();
 		$div    = $this->get_page()->find( 'xpath', '//h1[text()="' . $heading . '"]/..' );
 		$images = $div->findAll( 'css' ,'img' );
 		assertEquals( count( $rows ), count( $images ) );
 		for ( $i = 0;  $i < count( $rows );  $i++ ) {
 			assertEquals( $rows[$i][0], $images[$i]->getAttribute( 'title' ) );
+		}
+	}
+
+	/**
+	 * @Given /^I should see images in section "([^"]*)" with$/
+	 */
+	public function assert_image_width_in_section_and_rows( $heading, $table ) {
+		$rows_hash = $table->getRowsHash();
+		$div       = $this->get_page()->find( 'xpath', '//h1[text()="' . $heading . '"]/..' );
+		$images    = $div->findAll( 'css' ,'img' );
+		if ( array_key_exists( 'number of images', $rows_hash ) ) {
+			assertEquals( intval( $rows_hash['number of images'] ), count( $images ) );
+		}
+		$heading_encoded = str_replace( "'", "\\'", $heading );
+		$js = "(function(){div=$('h1:contains(\"$heading_encoded\")').parent();return JSON.stringify($(div).find('img').map(function(){return{width:$(this).innerWidth(),top:$(this).position().top-$(div).position().top,left:$(this).position().left-$(div).position().left};}).get())})();";
+		$result     = $this->getSession()->evaluateScript( $js );
+		$idx_in_row = -1;
+		$last_top   = -1;
+		foreach ( json_decode( $result, true ) as $image_info ) {
+			if ( $last_top == $image_info['top'] ) {
+				$idx_in_row++;
+				if ( array_key_exists( 'maximum per row', $rows_hash ) ) {
+					assertTrue( $idx_in_row < intval( $rows_hash['maximum per row'] ), 'Too many images in one row' );
+					if ( $idx_in_row == intval( $rows_hash['maximum per row'] ) - 1 ) {
+						$row_width = $image_info['left'] + $image_info['width'];
+						if ( array_key_exists( 'row width >=', $rows_hash ) ) {
+							assertTrue( $row_width >= intval( $rows_hash['row width >='] ), "Row width $row_width not >= " . $rows_hash['row width >='] );
+						}
+						if ( array_key_exists( 'row width <=', $rows_hash ) ) {
+							assertTrue( $row_width <= intval( $rows_hash['row width <='] ), "Row width $row_width not <= " . $rows_hash['row width >='] );
+						}
+					}
+				}
+			} else {
+				if ( array_key_exists( 'maximum per row', $rows_hash ) ) {
+					assertTrue( $idx_in_row == -1 || $idx_in_row == intval( $rows_hash['maximum per row'] ) - 1, 'Too less images in one row' );
+				}
+				$idx_in_row = 0;
+				$last_top   = $image_info['top'];
+			}
 		}
 	}
 

@@ -3,6 +3,15 @@
 trait AdminPostSteps {
 
 	/**
+	 * @Given /^the admin post action "([^"]*)" is invoked (\d+) times$/
+	 */
+	public function invoke_admin_post_action_n_times( $name, $n ) {
+		for ( $i = 0; $i < $n; $i++ ) { 
+			$this->invoke_admin_post_action( $name );
+		}
+	}
+
+	/**
 	 * @Given /^the admin post action "([^"]*)" is invoked$/
 	 */
 	public function invoke_admin_post_action( $name ) {

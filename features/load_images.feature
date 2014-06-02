@@ -5,10 +5,8 @@ Feature: Load images triggered by IFTTT
   
   Scenario: Load single image
     Given a fresh WordPress is installed
-    And the plugin "ifttt-instagram-gallery" is installed (from src)
-    And the plugin "ifttt-instagram-gallery" is activated
-    And the plugin "ifttt-instagram-gallery-testplugin" is installed (from features/plugins/ifttt-instagram-gallery-testplugin.php)
-    And the plugin "ifttt-instagram-gallery-testplugin" is activated
+    And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
+    And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
     And the option "uploads_use_yearmonth_folders" has the value "0"
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Caption   | My Instagram image |

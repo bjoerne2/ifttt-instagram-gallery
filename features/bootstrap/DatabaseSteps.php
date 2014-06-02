@@ -40,8 +40,8 @@ trait DatabaseSteps {
 	 */
 	public function set_serialized_content_struct( $option_name, $table ) {
 		$rows_hash  = $table->getRowsHash();
-		$caption    = $rows_hash['Caption']; 
-		$url        = $rows_hash['Url'];
+		$caption    = array_key_exists( 'Caption', $rows_hash ) ? $rows_hash['Caption'] : 'A caption';
+		$url        = array_key_exists( 'Url', $rows_hash ) ? $rows_hash['Url'] : 'http://example.com';
 		$source_url = $this->parameters['webserver_url'] . '/' . $rows_hash['Image'];
 		$additional_tags = '';
 		if ( array_key_exists( 'tags', $rows_hash ) ) {

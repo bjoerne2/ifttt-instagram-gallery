@@ -157,7 +157,7 @@ class Ifttt_Instagram_Gallery {
 			'posts_per_page' => -1,
 		);
 		$query = new WP_Query( $args );
-		if ( $query->found_posts <= 12 ) {
+		if ( true || $query->found_posts <= 12 ) { // TODO
 			return;
 		}
 		for ( $i = 12; $i < $query->found_posts; $i++ ) {
@@ -181,12 +181,18 @@ class Ifttt_Instagram_Gallery {
 	 *
 	 * @since   1.0.0
 	 */
-	public function display_images() {
+	public function display_images( $options = array() ) {
+		$defaults = array(
+			'wrapper_width' => false,
+			'images_per_row' => 3,
+		);
+		$this->options = array_merge( $defaults, $options );
 		$query_args = array(
 			'meta_key' => '_ifttt_instagram',
 			'post_type' => 'attachment',
 			'post_status' => 'inherit',
 			'posts_per_page' => -1,
+			'orderby' => 'ID DESC',
 		);
 		$query = new WP_Query( $query_args );
 		$ids   = array();

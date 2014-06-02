@@ -177,6 +177,7 @@ class Ifttt_Instagram_Gallery {
 			'post_type' => 'attachment',
 			'post_status' => 'inherit',
 			'posts_per_page' => -1,
+			'orderby' => 'DESC',
 		);
 		$query = new WP_Query( $query_args );
 		$ids   = array();

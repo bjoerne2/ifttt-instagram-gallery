@@ -165,5 +165,36 @@ class Ifttt_Instagram_Gallery {
 		}
 		wp_reset_postdata();
 	}
+
+	/**
+	 * Displays the instagram images.
+	 *
+	 * @since   1.0.0
+	 */
+	public function display_images() {
+		$query_args = array(
+			'meta_key' => '_ifttt_instagram',
+			'post_type' => 'attachment',
+			'post_status' => 'inherit',
+			'posts_per_page' => -1,
+		);
+		$query = new WP_Query( $query_args );
+		$ids   = array();
+		foreach ( $query->posts as $post ) {
+			$ids[] = $post->ID;
+		}
+		update_postmeta_cache( $ids );
+		$this->images = array();
+		foreach ( $query->posts as $post ) {
+			$attachment_metadata = wp_get_attachment_metadata( $post->ID );
+			$custom_values = get_post_custom_values( '_ifttt_instagram', $post->ID );
+			$this->images[] = array(
+				'instagram_url' => unserialize( $custom_values[0] )['url'],
+				'image_url' => wp_upload_dir()['url'] . '/' . $attachment_metadata['sizes']['thumbnail']['file'],
+				'title' => $post->post_content,
+			);
+		}
+		include( 'views/images.php' );
+	}
 }
 

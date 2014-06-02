@@ -10,7 +10,7 @@ default:
         sqlite_integration: sqlite-integration.1.6.3.zip
         disable_google_fonts: disable-google-fonts.1.0.zip
       database_file: database_no_gravatar.sqlite
-      selenium_implicit_timeout: 10000
+      selenium_implicit_timeout: -1
   extensions:
     Behat\MinkExtension\Extension:
       base_url: 'http://localhost/wordpress-behat/'

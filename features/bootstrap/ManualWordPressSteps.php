@@ -88,6 +88,19 @@ trait ManualWordPressSteps {
 	}
 
 	/**
+	 * @Given /I should see images in section "([^"]*)"$/
+	 */
+	public function assert_images_in_section( $heading, $table ) {
+		$rows   = $table->getRows();
+		$div    = $this->get_page()->find( 'xpath', '//h1[text()="' . $heading . '"]/..' );
+		$images = $div->findAll( 'css' ,'img' );
+		assertEquals( count( $rows ), count( $images ) );
+		for ( $i = 0;  $i < count( $rows );  $i++ ) {
+			assertEquals( $rows[$i][0], $images[$i]->getAttribute( 'title' ) );
+		}
+	}
+
+	/**
 	 * @Given /^I wait for ([\d\.]*) second[s]?$/
 	 */
 	public function wait( $seconds ) {

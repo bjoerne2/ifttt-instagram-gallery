@@ -28,6 +28,14 @@ trait DatabaseSteps {
 	}
 
 	/**
+	 * @Given /^the theme "([^"]*)" is activated$/
+	 */
+	public function activate_theme( $theme_id ) {
+		$this->set_option( 'stylesheet', $theme_id );
+		$this->set_option( 'template', $theme_id );
+	}
+
+	/**
 	 * @Given /^the option "([^"]*)" has the serialized content struct$/
 	 */
 	public function set_serialized_content_struct( $option_name, $table ) {

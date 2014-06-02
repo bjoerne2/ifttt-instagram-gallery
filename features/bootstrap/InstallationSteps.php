@@ -50,6 +50,20 @@ trait InstallationSteps {
 	}
 
 	/**
+	 * @Given /^the theme "([^"]*)" is installed \(from ([^\)]*)\)$/
+	 */
+	public function install_theme_from_src( $theme_id, $source ) {
+		$source_path = $this->path( dirname( dirname( dirname( __FILE__ ) ) ), $source );
+		$source_pathinfo = pathinfo( $source_path );
+		$target_file_or_dir_name = $source_pathinfo['basename'];
+		if ( strpos( $target_file_or_dir_name, $theme_id ) === false ) {
+			$target_file_or_dir_name = $theme_id;
+		}
+		$this->copy_file_or_dir( $source_path, $this->path( $this->webserver_dir, 'wp-content', 'themes', $target_file_or_dir_name ) );
+	}
+
+
+	/**
 	 * @Given /^the plugin "([^"]*)" is installed$/
 	 */
 	public function install_plugin( $plugin_id ) {

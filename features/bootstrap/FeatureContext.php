@@ -37,7 +37,7 @@ class FeatureContext extends MinkContext {
 	 * @BeforeScenario
 	 */
 	public function set_implicit_timeout( $event ) {
-		if ( array_key_exists( 'selenium_implicit_timeout', $this->parameters ) ) {
+		if ( array_key_exists( 'selenium_implicit_timeout', $this->parameters ) && $this->parameters['selenium_implicit_timeout'] >= 0 ) {
 			$this->getSession()->getDriver()->setTimeouts( array( 'implicit' => $this->parameters['selenium_implicit_timeout'] ) );
 		}
 	}

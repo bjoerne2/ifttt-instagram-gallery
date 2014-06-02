@@ -145,12 +145,12 @@ class Ifttt_Instagram_Gallery {
 		// Save the data
 		$id = wp_insert_attachment( $attachment, $upload[ 'file' ] );
 		wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload['file'] ) );
-		add_post_meta( $id, '_instagram', $instagram_url );
+		add_post_meta( $id, '_ifttt_instagram', array( 'url' => $instagram_url ) );
 	}
 
 	private function remove_old_images() {
 		$args = array(
-			'meta_key' => '_instagram',
+			'meta_key' => '_ifttt_instagram',
 			'post_type' => 'attachment',
 			'post_status' => 'inherit',
 			'posts_per_page' => -1,

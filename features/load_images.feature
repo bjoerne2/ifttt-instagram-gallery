@@ -24,4 +24,4 @@ Feature: Load images triggered by IFTTT
       | post_type      | attachment |
       | post_mime_type | image/jpeg |
       | post_status    | inherit |
-      | metadata       | _instagram => http://example.com |
+      | metadata       | _ifttt_instagram => {"url":"http://example.com"} |

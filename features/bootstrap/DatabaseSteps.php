@@ -114,10 +114,13 @@ trait DatabaseSteps {
 		if ( $metadata ) {
 			$post_id = $result[0]['ID'];
 			$metadata_parts = array_map( 'trim', explode( '=>', $metadata ) );
-			$stmt = $pdo->prepare( 'SELECT * FROM wp_postmeta WHERE post_id = :post_id AND meta_key = :meta_key AND meta_value = :meta_value' );
-			$stmt->execute( array( 'post_id' => $post_id, 'meta_key' => $metadata_parts[0], 'meta_value' => $metadata_parts[1] ) );
+			$meta_key       = $metadata_parts[0];
+			$meta_value     = serialize( json_decode( $metadata_parts[1], true ) );
+			$stmt           = $pdo->prepare( 'SELECT * FROM wp_postmeta WHERE post_id = :post_id AND meta_key = :meta_key' );
+			$stmt->execute( array( 'post_id' => $post_id, 'meta_key' => $meta_key ) );
 			$result = $this->fetch_all( $stmt );
-			assertEquals( count( $result ), 1, 'Metadata was not found' );
+			assertEquals( count( $result ), 1, "Metadata with key '$meta_key' was not found" );
+			assertEquals( $meta_value, $result[0]['meta_value'] );
 		}
 	}
 

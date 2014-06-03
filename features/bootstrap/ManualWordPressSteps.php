@@ -151,6 +151,41 @@ trait ManualWordPressSteps {
 	}
 
 	/**
+	 * @Given /^I should see image files$/
+	 */
+	public function assert_image_files( $table ) {
+		$rows   = $table->getRows();
+		$div    = $this->get_page()->find( 'css', '.ifttt-instagram-images' );
+		$images = $div->findAll( 'css' ,'img' );
+		assertEquals( count( $rows ) , count( $images ) );
+		for ( $i = 0; $i < count( $rows ); $i++ ) {
+			$image = $images[$i];
+			$image_src  = $image->getAttribute( 'src' );
+			$image_file = substr( $image_src, strrpos( $image_src, '/' ) + 1 );
+			assertEquals( $rows[$i][0], $image_file );			
+		}
+	}
+
+	/**
+	 * @Given /^I should not see image files$/
+	 */
+	public function assert_image_files_different_order( $table ) {
+		$rows   = $table->getRows();
+		$div    = $this->get_page()->find( 'css', '.ifttt-instagram-images' );
+		$images = $div->findAll( 'css' ,'img' );
+		assertEquals( count( $rows ) , count( $images ) );
+		for ( $i = 0; $i < count( $rows ); $i++ ) {
+			$image = $images[$i];
+			$image_src  = $image->getAttribute( 'src' );
+			$image_file = substr( $image_src, strrpos( $image_src, '/' ) + 1 );
+			if ( $rows[$i][0] != $image_file ) {
+				return;
+			}
+		}
+		PHPUnit_Framework_Assert::fail( 'All images are found in the exact order' );
+	}
+
+	/**
 	 * @Given /^the css file "([^"]*)" should be loaded$/
 	 */
 	public function assert_css_file_loaded( $rel_file_path ) {

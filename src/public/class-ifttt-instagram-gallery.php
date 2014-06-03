@@ -221,6 +221,13 @@ class Ifttt_Instagram_Gallery {
 	 * @since   1.0.0
 	 */
 	public function get_images( $options = array() ) {
+		foreach ( $options as $key => $value ) {
+			if ( 'true' == $value ) {
+				$options[$key] = true;
+			} elseif ( 'false' == $value ) {
+				$options[$key] = false;
+			}
+		}
 		$defaults = array(
 			'wrapper_width' => false,
 			'images_per_row' => 3,
@@ -234,17 +241,38 @@ class Ifttt_Instagram_Gallery {
 			'posts_per_page' => -1,
 			'orderby' => 'ID DESC',
 		);
-		if ( array_key_exists( 'num_of_images', $this->options ) ) {
+		if ( array_key_exists( 'num_of_images', $this->options ) && ! @$options['random'] ) {
 			$query_args['posts_per_page'] = $options['num_of_images'];
 		}
 		$query = new WP_Query( $query_args );
-		$ids   = array();
-		foreach ( $query->posts as $post ) {
+		if ( @$options['random'] ) {
+			if ( array_key_exists( 'num_of_images', $this->options ) ) {
+				$num_of_images = $options['num_of_images'];
+			} else {
+				$num_of_images = count( $query->posts );
+			}
+			$posts = array();
+			$random_posts = array();
+			for ( $i = 0; $i < count( $query->posts ); $i++ ) {
+				$random_posts[$i] = $query->posts[$i];
+			}
+			for ( $i = 0; $i < $num_of_images; $i++ ) {
+				$swap_idx = count( $query->posts ) - $i - 1;
+				$random_idx = rand( 0, $swap_idx );
+				$posts[] = $random_posts[$random_idx];
+				$random_posts[$random_idx] = $random_posts[$swap_idx];
+				unset( $random_posts[$swap_idx] );
+			}
+		} else {
+			$posts = $query->posts;
+		}
+		$ids = array();
+		foreach ( $posts as $post ) {
 			$ids[] = $post->ID;
 		}
 		update_postmeta_cache( $ids );
 		$this->images = array();
-		foreach ( $query->posts as $post ) {
+		foreach ( $posts as $post ) {
 			$full_image_url = $post->guid;
 			if ( 'full' == $this->options['image_size'] ) {
 				$image_url = $full_image_url;

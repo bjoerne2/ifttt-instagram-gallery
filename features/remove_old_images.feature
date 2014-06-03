@@ -17,7 +17,7 @@ Feature: Remove old images
     And I fill in "ifttt_instagram_gallery_options_keep_max_images" with "1"
     And I press "submit"
     Then I should see the message "Settings saved"
-    And the option "ifttt_instagram_gallery_options" should have the serialized value {"keep_max_images":1}
+    And the option "ifttt_instagram_gallery_options" should be serialized and contain {"keep_max_images":1}
     When I go to "/"
     Then I should see images in section "ifttt_instagram_gallery_images()" with
       | number of images | 1 |

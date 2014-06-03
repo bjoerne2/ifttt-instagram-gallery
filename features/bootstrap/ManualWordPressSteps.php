@@ -152,6 +152,30 @@ trait ManualWordPressSteps {
 	}
 
 	/**
+	 * @Given /^the css file "([^"]*)" should be loaded$/
+	 */
+	public function assert_css_file_loaded( $rel_file_path ) {
+		$links = $this->get_page()->findAll( 'css' ,'link' );
+		foreach ( $links as $link ) {
+			if ( strpos( $href = $link->getAttribute( 'href' ), $rel_file_path ) !== false ) {
+				return;
+			}
+		}
+	}
+
+	/**
+	 * @Given /^the css file "([^"]*)" should not be loaded$/
+	 */
+	public function assert_css_file_not_loaded( $rel_file_path ) {
+		$links = $this->get_page()->findAll( 'css' ,'link' );
+		foreach ( $links as $link ) {
+			if ( strpos( $href = $link->getAttribute( 'href' ), $rel_file_path ) !== false ) {
+				PHPUnit_Framework_Assert::fail( "Css file $rel_file_path has been loaded" );
+			}
+		}
+	}
+
+	/**
 	 * @Given /^I wait for ([\d\.]*) second[s]?$/
 	 */
 	public function wait( $seconds ) {

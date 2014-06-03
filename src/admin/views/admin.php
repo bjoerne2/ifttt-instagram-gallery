@@ -23,11 +23,15 @@
 ?>
 		<table class="form-table">
 			<tbody>
-
 				<tr>
 					<th scope="row"><label for="ifttt_instagram_gallery_options_keep_max_images"><?php _ex( 'Maximum numbers of images to keep', $this->plugin_slug ); ?></label></th>
 					<td><input name="ifttt_instagram_gallery_options[keep_max_images]" type="text" class="regular-text" id="ifttt_instagram_gallery_options_keep_max_images" value="<?php echo esc_attr( @$this->options['keep_max_images'] ); ?>">
 						<p class="description"><?php _ex( 'If you configure a lower number than the current number of images the current images are removed accordingly', 'Form field description', $this->plugin_slug ); ?></p></td>
+				</tr>
+				<tr>
+					<th scope="row"><?php _ex( 'Load plugin css', $this->plugin_slug ); ?></th>
+					<td><label for="ifttt_instagram_gallery_options_load_css"><input name="ifttt_instagram_gallery_options[load_css]" type="checkbox" id="ifttt_instagram_gallery_options_load_css" value="1"<?php checked( '1', false !== @$this->options['load_css'] ); ?>>
+						<?php _ex( 'If you want take care of css in your theme you can uncheck this option to skip the loading of the css file', 'Form field description', $this->plugin_slug ); ?></label></td>
 				</tr>
 			</tbody>
 		</table>

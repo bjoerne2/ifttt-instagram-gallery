@@ -79,6 +79,27 @@ trait DatabaseSteps {
 	}
 
 	/**
+	 * @Given /the option "([^"]*)" should be serialized and contain (.*)$/
+	 */
+	public function assert_serialized_option_contains_value( $option_name, $option_value ) {
+		$expected_option_values = json_decode( $option_value, true );
+		$pdo  = $this->create_pdo();
+		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
+		$stmt->execute( array( ':option_name' => $option_name ) );
+		$result = $this->fetch_all( $stmt );
+		assertEquals( count( $result ), 1, "Option '$option_name' doesn't exists" );
+		$unserialized = unserialize( $result[0]['option_value'] );
+		foreach ( $expected_option_values as $expected_option_name => $expected_option_value ) {
+			foreach ( $unserialized as $option_name => $option_value ) {
+				if ( $expected_option_name == $option_name && $expected_option_value == $option_value ) {
+					break;
+				}
+				PHPUnit_Framework_Assert::fail( "Option $option_value not found in " . json_encode( $unserialized ) );
+			}
+		}
+	}
+
+	/**
 	 * @Given /the option "([^"]*)" should have the serialized value (.*)$/
 	 */
 	public function assert_serialized_option_value( $option_name, $option_value ) {

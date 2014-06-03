@@ -111,7 +111,7 @@ trait ManualWordPressSteps {
 			assertEquals( intval( $rows_hash['number of images'] ), count( $images ) );
 		}
 		$heading_encoded = str_replace( "'", "\\'", $heading );
-		$js = "(function(){div=$('h1:contains(\"$heading_encoded\")').parent();return JSON.stringify($(div).find('img').map(function(){return{width:$(this).innerWidth(),top:$(this).position().top-$(div).position().top,left:$(this).position().left-$(div).position().left};}).get())})();";
+		$js = "(function(){div=jQuery('h1:contains(\"$heading_encoded\")').parent();return JSON.stringify(jQuery(div).find('img').map(function(){return{width:jQuery(this).innerWidth(),top:jQuery(this).position().top-jQuery(div).position().top,left:jQuery(this).position().left-jQuery(div).position().left};}).get())})();";
 		$result     = $this->getSession()->evaluateScript( $js );
 		$idx_in_row = -1;
 		$last_top   = -1;

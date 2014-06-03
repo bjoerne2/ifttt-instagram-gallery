@@ -79,6 +79,19 @@ trait DatabaseSteps {
 	}
 
 	/**
+	 * @Given /^the hello world post has the content "([^"]*)"$/
+	 */
+	public function set_hello_word_content( $content ) {
+		$pdo  = $this->create_pdo();
+		$stmt = $pdo->prepare( 'SELECT ID FROM wp_posts WHERE post_type = :post_type ORDER BY ID' );
+		$stmt->execute( array( ':post_type' => 'post' ) );
+		$result = $this->fetch_all( $stmt );
+		$id     = $result[0]['ID'];
+		$stmt   = $pdo->prepare( 'UPDATE wp_posts SET post_content = :post_content WHERE ID = :ID' );
+		$stmt->execute( array( ':post_content' => $content, ':ID' => $id ) );
+	}
+
+	/**
 	 * @Given /the option "([^"]*)" should be serialized and contain (.*)$/
 	 */
 	public function assert_serialized_option_contains_value( $option_name, $option_value ) {

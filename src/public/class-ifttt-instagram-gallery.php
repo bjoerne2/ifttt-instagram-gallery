@@ -63,6 +63,7 @@ class Ifttt_Instagram_Gallery {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_action( 'ifttt_wordpress_bridge', array( $this, 'load_instagram_image' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_shortcode( 'ifttt_instagram_gallery_images', array( $this, 'images_shortcode' ) );
 	}
 
 	/**
@@ -192,11 +193,34 @@ class Ifttt_Instagram_Gallery {
 	}
 
 	/**
+	 * Shortcode function to display the instagram images.
+	 *
+	 * @since   1.0.0
+	 */
+	public function images_shortcode( $attr, $content = null ) {
+		if ( $attr ) {
+			return $this->get_images( $attr );
+		} else {
+			return $this->get_images();
+		}
+	}
+
+
+	/**
 	 * Displays the instagram images.
 	 *
 	 * @since   1.0.0
 	 */
 	public function display_images( $options = array() ) {
+		echo $this->get_images( $options );
+	}
+
+	/**
+	 * Returns the instagram images html code.
+	 *
+	 * @since   1.0.0
+	 */
+	public function get_images( $options = array() ) {
 		$defaults = array(
 			'wrapper_width' => false,
 			'images_per_row' => 3,
@@ -236,7 +260,9 @@ class Ifttt_Instagram_Gallery {
 				'title' => $post->post_content,
 			);
 		}
+		ob_start();
 		include( 'views/images.php' );
+		return ob_get_clean();
 	}
 }
 

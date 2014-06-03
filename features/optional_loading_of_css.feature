@@ -32,5 +32,4 @@ Feature: Skip loading of css
     When I go to "/wp-admin/options-general.php?page=ifttt-instagram-gallery.php"
     And I check "ifttt_instagram_gallery_options_load_css"
     And I press "submit"
-    Then the option "ifttt_instagram_gallery_options" should be serialized and contain "load_css":false
-
+    Then the option "ifttt_instagram_gallery_options" should be serialized and contain {"load_css":"1"}

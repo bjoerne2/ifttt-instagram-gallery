@@ -88,11 +88,11 @@ trait ManualWordPressSteps {
 	}
 
 	/**
-	 * @Given /I should see images in section "([^"]*)" with titles$/
+	 * @Given /I should see images with titles$/
 	 */
-	public function assert_image_titles_in_section( $heading, $table ) {
+	public function assert_image_titles( $table ) {
 		$rows   = $table->getRows();
-		$div    = $this->get_page()->find( 'xpath', '//h1[text()="' . $heading . '"]/..' );
+		$div    = $this->get_page()->find( 'css', '.ifttt-instagram-images' );
 		$images = $div->findAll( 'css' ,'img' );
 		assertEquals( count( $rows ), count( $images ) );
 		for ( $i = 0;  $i < count( $rows );  $i++ ) {
@@ -101,17 +101,16 @@ trait ManualWordPressSteps {
 	}
 
 	/**
-	 * @Given /^I should see images in section "([^"]*)" with$/
+	 * @Given /^I should see images with$/
 	 */
-	public function assert_image_width_in_section_and_rows( $heading, $table ) {
+	public function assert_images_with_preferences( $table ) {
 		$rows_hash = $table->getRowsHash();
-		$div       = $this->get_page()->find( 'xpath', '//h1[text()="' . $heading . '"]/..' );
+		$div       = $this->get_page()->find( 'css', '.ifttt-instagram-images' );
 		$images    = $div->findAll( 'css' ,'img' );
 		if ( array_key_exists( 'number of images', $rows_hash ) ) {
 			assertEquals( intval( $rows_hash['number of images'] ), count( $images ) );
 		}
-		$heading_encoded = str_replace( "'", "\\'", $heading );
-		$js = "(function(){div=jQuery('h1:contains(\"$heading_encoded\")').parent();return JSON.stringify(jQuery(div).find('img').map(function(){return{width:jQuery(this).innerWidth(),top:jQuery(this).position().top-jQuery(div).position().top,left:jQuery(this).position().left-jQuery(div).position().left};}).get())})();";
+		$js = "(function(){wrapper=jQuery('.ifttt-instagram-images');return JSON.stringify(jQuery(wrapper).find('img').map(function(){return{width:jQuery(this).innerWidth(),top:jQuery(this).position().top-jQuery(wrapper).position().top,left:jQuery(this).position().left-jQuery(wrapper).position().left};}).get())})();";
 		$result     = $this->getSession()->evaluateScript( $js );
 		$idx_in_row = -1;
 		$last_top   = -1;
@@ -141,10 +140,10 @@ trait ManualWordPressSteps {
 	}
 
 	/**
-	 * @Given /^I should see image file "([^"]*)" in section "([^"]*)"$/
+	 * @Given /^I should see image file "([^"]*)"$/
 	 */
-	public function assert_image_file_in_section( $expected_file, $heading ) {
-		$div        = $this->get_page()->find( 'xpath', '//h1[text()="' . $heading . '"]/..' );
+	public function assert_image_file( $expected_file ) {
+		$div        = $this->get_page()->find( 'css', '.ifttt-instagram-images' );
 		$image      = $div->find( 'css' ,'img' );
 		$image_src  = $image->getAttribute( 'src' );
 		$image_file = substr( $image_src, strrpos( $image_src, '/' ) + 1 );

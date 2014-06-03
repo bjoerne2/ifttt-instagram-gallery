@@ -19,7 +19,7 @@ Feature: Remove old images
     Then I should see the message "Settings saved"
     And the option "ifttt_instagram_gallery_options" should be serialized and contain {"keep_max_images":1}
     When I go to "/"
-    Then I should see images in section "ifttt_instagram_gallery_images()" with
+    Then I should see images with
       | number of images | 1 |
 
   Scenario: Configure invalid maximum number of images
@@ -51,5 +51,5 @@ Feature: Remove old images
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked 2 times
     And I am logged as an administrator
     When I go to "/"
-    Then I should see images in section "ifttt_instagram_gallery_images()" with
+    Then I should see images with
       | number of images | 1 |

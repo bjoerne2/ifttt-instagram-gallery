@@ -105,10 +105,10 @@ trait DatabaseSteps {
 		foreach ( $expected_option_values as $expected_option_name => $expected_option_value ) {
 			foreach ( $unserialized as $option_name => $option_value ) {
 				if ( $expected_option_name == $option_name && $expected_option_value == $option_value ) {
-					break;
+					continue 2;
 				}
-				PHPUnit_Framework_Assert::fail( "Option $option_value not found in " . json_encode( $unserialized ) );
 			}
+			PHPUnit_Framework_Assert::fail( "Option $option_value not found in " . json_encode( $unserialized ) );
 		}
 	}
 

@@ -153,3 +153,16 @@ Feature: Display instragram images via shortcode
     And the hello world post has the content "[ifttt_instagram_gallery_images image_size=full]"
     When I go to "/"
     Then I should see image file "ifttt_instagram_test_image.jpg"
+
+  Scenario: Display number of images
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
+    And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
+      | Image     | ifttt_instagram_test_image.jpg |
+    And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked 2 times
+    And the hello world post has the content "[ifttt_instagram_gallery_images num_of_images=1]"
+    When I go to "/"
+    Then I should see images with
+      | number of images | 1 |

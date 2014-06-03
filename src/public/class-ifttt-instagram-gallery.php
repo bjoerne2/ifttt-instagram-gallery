@@ -227,13 +227,16 @@ class Ifttt_Instagram_Gallery {
 			'image_size' => 'thumbnail',
 		);
 		$this->options = array_merge( $defaults, $options );
-		$query_args = array(
+		$query_args    = array(
 			'meta_key' => '_ifttt_instagram',
 			'post_type' => 'attachment',
 			'post_status' => 'inherit',
 			'posts_per_page' => -1,
 			'orderby' => 'ID DESC',
 		);
+		if ( array_key_exists( 'num_of_images', $this->options ) ) {
+			$query_args['posts_per_page'] = $options['num_of_images'];
+		}
 		$query = new WP_Query( $query_args );
 		$ids   = array();
 		foreach ( $query->posts as $post ) {

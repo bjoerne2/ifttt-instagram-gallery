@@ -156,7 +156,7 @@ trait ManualWordPressSteps {
 	 * @author Maarten Jacobs
 	 **/
 	private function login( $username, $password ) {
-		$this->visit( 'wp-admin' );
+		$this->visit( 'wp-login.php' );
 		$page = $this->get_page();
 		$page->fillField( 'user_login', $username );
 		$page->fillField( 'user_pass', $password );

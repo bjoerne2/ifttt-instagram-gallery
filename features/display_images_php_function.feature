@@ -6,8 +6,8 @@ Feature: Display instragram images via PHP function
   Scenario: See images in theme ordered from new to old
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
-    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Caption   | An Instagram image |
@@ -29,8 +29,8 @@ Feature: Display instragram images via PHP function
   Scenario: See maximum 1 images per row
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
-    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
@@ -45,8 +45,8 @@ Feature: Display instragram images via PHP function
   Scenario: See maximum 2 images per row
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
-    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
@@ -61,8 +61,8 @@ Feature: Display instragram images via PHP function
   Scenario: See maximum 3 images per row
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
-    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
@@ -77,8 +77,8 @@ Feature: Display instragram images via PHP function
   Scenario: See maximum 8 images per row
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
-    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
@@ -93,8 +93,8 @@ Feature: Display instragram images via PHP function
   Scenario: See maximum 20 images per row
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
-    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |

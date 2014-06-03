@@ -149,7 +149,19 @@ class Ifttt_Instagram_Gallery {
 		add_post_meta( $id, '_ifttt_instagram', array( 'url' => $instagram_url ) );
 	}
 
-	private function remove_old_images() {
+	/**
+	 * Removes older images if 'keep_max_images' is configured.
+	 *
+	 * @since    1.0.0
+	 */
+	public function remove_old_images( $keep_max_images = null ) {
+		if ( null === $keep_max_images ) {
+			$options = get_option( 'ifttt_instagram_gallery_options', array() );
+			$keep_max_images = @$options['keep_max_images'];
+		}
+		if ( ! $keep_max_images ) {
+			return;
+		}
 		$args = array(
 			'meta_key' => '_ifttt_instagram',
 			'post_type' => 'attachment',
@@ -157,10 +169,10 @@ class Ifttt_Instagram_Gallery {
 			'posts_per_page' => -1,
 		);
 		$query = new WP_Query( $args );
-		if ( true || $query->found_posts <= 12 ) { // TODO
+		if ( $query->found_posts <= $keep_max_images ) {
 			return;
 		}
-		for ( $i = 12; $i < $query->found_posts; $i++ ) {
+		for ( $i = $keep_max_images; $i < $query->found_posts; $i++ ) {
 			$post = $query->posts[$i];
 			wp_delete_post( $post->ID );
 		}

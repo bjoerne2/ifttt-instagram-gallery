@@ -52,6 +52,7 @@ class Ifttt_Instagram_Gallery_Admin {
 
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
+		add_action( 'admin_init', array( $this, 'register_options_setting' ) );
 
 		// Add an action link pointing to the options page.
 		$plugin_basename = plugin_basename( plugin_dir_path( realpath( dirname( __FILE__ ) ) ) . $this->plugin_slug . '.php' );
@@ -102,7 +103,44 @@ class Ifttt_Instagram_Gallery_Admin {
 	 * @since    1.0.0
 	 */
 	public function display_plugin_admin_page() {
+		$this->options = get_option( 'ifttt_instagram_gallery_options', array() );
 		include_once( 'views/admin.php' );
+	}
+
+	/**
+	 * Registers the settings.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_options_setting() {
+		register_setting( 'ifttt_instagram_gallery_options_group', 'ifttt_instagram_gallery_options', array( $this, 'validate_options' ) );
+	}
+
+	/**
+	 * Validates the options.
+	 *
+	 * @since    1.0.0
+	 */
+	public function validate_options( $options ) {
+		$keep_max_images = $options['keep_max_images'];
+		if ( '' != $keep_max_images ) {
+			if ( ! is_int( $keep_max_images ) ) {
+				if ( ctype_digit( $keep_max_images ) ) {
+					$keep_max_images = intval( $keep_max_images );
+				} else {
+					$keep_max_images = -1;
+				}
+			}
+			if ( $keep_max_images <= 0 ) {
+				$error_msg = _x( "Invalid value for '%s'. Must be a positive integer.", 'Error message', $this->plugin_slug );
+				add_settings_error( '', esc_attr( 'settings_updated' ), sprintf( $error_msg, __( 'Maximum numbers of images to keep', $this->plugin_slug ) ), 'error' );
+				unset( $options['keep_max_images'] );
+			} else {
+				$options['keep_max_images'] = $keep_max_images;
+				Ifttt_Instagram_Gallery::get_instance()->remove_old_images( $keep_max_images );
+			}
+		}
+		return $options;
 	}
 
 	/**

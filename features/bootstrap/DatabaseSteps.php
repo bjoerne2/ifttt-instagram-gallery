@@ -54,7 +54,7 @@ trait DatabaseSteps {
 	}
 
 	/**
-	 * @Given /^the option "([^"]*)" has the serialized value ([^']*)$/
+	 * @Given /^the option "([^"]*)" has the serialized value (.*)$/
 	 */
 	public function set_serialized_option( $option_name, $option_value ) {
 		$option_value_obj = json_decode( $option_value, true );
@@ -76,6 +76,15 @@ trait DatabaseSteps {
 			$stmt = $pdo->prepare( 'UPDATE wp_options SET option_value = :option_value WHERE option_name = :option_name' );
 		}
 		$stmt->execute( array( ':option_name' => $option_name, ':option_value' => $option_value ) );
+	}
+
+	/**
+	 * @Given /the option "([^"]*)" should have the serialized value (.*)$/
+	 */
+	public function assert_serialized_option_value( $option_name, $option_value ) {
+		$option_value_obj = json_decode( $option_value, true );
+		$serialized = serialize( $option_value_obj );
+		$this->assert_option_value( $option_name, $serialized );
 	}
 
 	/**

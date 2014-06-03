@@ -141,6 +141,17 @@ trait ManualWordPressSteps {
 	}
 
 	/**
+	 * @Given /^I should see image file "([^"]*)" in section "([^"]*)"$/
+	 */
+	public function assert_image_file_in_section( $expected_file, $heading ) {
+		$div        = $this->get_page()->find( 'xpath', '//h1[text()="' . $heading . '"]/..' );
+		$image      = $div->find( 'css' ,'img' );
+		$image_src  = $image->getAttribute( 'src' );
+		$image_file = substr( $image_src, strrpos( $image_src, '/' ) + 1 );
+		assertEquals( $expected_file, $image_file );
+	}
+
+	/**
 	 * @Given /^I wait for ([\d\.]*) second[s]?$/
 	 */
 	public function wait( $seconds ) {

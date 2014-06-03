@@ -105,3 +105,51 @@ Feature: Display instragram images via PHP function
       | row width >=     | 784 |
       | row width <=     | 800 |
       | maximum per row  | 20 |
+
+  Scenario: Display default image size
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
+    And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
+    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
+      | Image     | ifttt_instagram_test_image.jpg |
+    And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
+    When I go to "/"
+    Then I should see image file "ifttt_instagram_test_image-150x150.jpg" in section "ifttt_instagram_gallery_images()"
+
+  Scenario: Display medium image size
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
+    And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
+    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
+      | Image     | ifttt_instagram_test_image.jpg |
+    And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
+    When I go to "/"
+    Then I should see image file "ifttt_instagram_test_image-300x300.jpg" in section "ifttt_instagram_gallery_images(array('image_size'=>'medium'))"
+
+  Scenario: Display large image size
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
+    And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
+    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
+      | Image     | ifttt_instagram_test_image.jpg |
+    And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
+    When I go to "/"
+    Then I should see image file "ifttt_instagram_test_image.jpg" in section "ifttt_instagram_gallery_images(array('image_size'=>'large'))"
+
+  Scenario: Display full image size
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
+    And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
+    And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
+    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
+      | Image     | ifttt_instagram_test_image.jpg |
+    And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
+    When I go to "/"
+    Then I should see image file "ifttt_instagram_test_image.jpg" in section "ifttt_instagram_gallery_images(array('image_size'=>'full'))"

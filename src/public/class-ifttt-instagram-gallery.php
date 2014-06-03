@@ -197,6 +197,7 @@ class Ifttt_Instagram_Gallery {
 		$defaults = array(
 			'wrapper_width' => false,
 			'images_per_row' => 3,
+			'image_size' => 'thumbnail',
 		);
 		$this->options = array_merge( $defaults, $options );
 		$query_args = array(
@@ -214,11 +215,21 @@ class Ifttt_Instagram_Gallery {
 		update_postmeta_cache( $ids );
 		$this->images = array();
 		foreach ( $query->posts as $post ) {
-			$attachment_metadata = wp_get_attachment_metadata( $post->ID );
-			$custom_values = get_post_custom_values( '_ifttt_instagram', $post->ID );
+			$full_image_url = $post->guid;
+			if ( 'full' == $this->options['image_size'] ) {
+				$image_url = $full_image_url;
+			} else {
+				$attachment_metadata = wp_get_attachment_metadata( $post->ID );
+				if ( array_key_exists( $this->options['image_size'] , $attachment_metadata['sizes'] ) ) {
+					$image_url = substr_replace( $full_image_url, $attachment_metadata['sizes'][$this->options['image_size']]['file'], strrpos(  $full_image_url, '/' ) + 1 );
+				} else {
+					$image_url = $full_image_url;
+				}
+			}
+			$custom_values  = get_post_custom_values( '_ifttt_instagram', $post->ID );
 			$this->images[] = array(
 				'instagram_url' => unserialize( $custom_values[0] )['url'],
-				'image_url' => wp_upload_dir()['url'] . '/' . $attachment_metadata['sizes']['thumbnail']['file'],
+				'image_url' => $image_url,
 				'title' => $post->post_content,
 			);
 		}

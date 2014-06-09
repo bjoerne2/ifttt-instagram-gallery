@@ -46,6 +46,21 @@ trait ManualWordPressSteps {
 	}
 
 	/**
+	 * @Given /^I activate the widget "([^"]*)"$/
+	 */
+	public function activate_widget_manually( $widget_id ) {
+		$widget_div = $this->get_page()->find( 'xpath', "//div[contains(@id, '$widget_id')]" );
+		$widget_div->find( 'css', 'h4' )->click();
+		$widget_div_id = $widget_div->getAttribute( 'id' );
+		$this->getSession()->wait( 5000, "jQuery('#$widget_div_id .widgets-chooser').length == 1");
+		$this->get_page()->pressButton( 'Add Widget' );
+		$sidebar = $this->get_page()->find( 'css', '#sidebar-1' );
+		$widget_div = $sidebar->find( 'xpath', "//div[contains(@id, '$widget_id')]" );
+		$widget_div_id = $widget_div->getAttribute( 'id' );
+		sleep( 1 );
+	}
+
+	/**
 	 * @Given /^I should see the message "([^"]*)"$/
 	 */
 	public function assert_message( $msg ) {

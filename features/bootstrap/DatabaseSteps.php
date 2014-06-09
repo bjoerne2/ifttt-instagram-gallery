@@ -102,9 +102,9 @@ trait DatabaseSteps {
 		$result = $this->fetch_all( $stmt );
 		assertEquals( count( $result ), 1, "Option '$option_name' doesn't exists" );
 		$unserialized = unserialize( $result[0]['option_value'] );
-		foreach ( $expected_option_values as $expected_option_name => $expected_option_value ) {
-			foreach ( $unserialized as $option_name => $option_value ) {
-				if ( $expected_option_name == $option_name && $expected_option_value == $option_value ) {
+		foreach ( $expected_option_values as $expected_option_k => $expected_option_v ) {
+			foreach ( $unserialized as $option_k => $option_v ) {
+				if ( $expected_option_k == $option_k && $expected_option_v == $option_v ) {
 					continue 2;
 				}
 			}
@@ -174,6 +174,26 @@ trait DatabaseSteps {
 			assertEquals( $meta_value, $result[0]['meta_value'] );
 		}
 	}
+
+	/**
+	 * @Given /the widget "([^"]*)" should be activated$/
+	 */
+	public function assert_widget_activated( $widget_id ) {
+		$pdo  = $this->create_pdo();
+		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
+		$stmt->execute( array( ':option_name' => 'sidebars_widgets' ) );
+		$result = $this->fetch_all( $stmt );
+		assertEquals( count( $result ), 1, "Option 'sidebars_widgets' doesn't exists" );
+		$unserialized_option_value = unserialize( $result[0]['option_value'] );
+		$active_widgets = $unserialized_option_value['sidebar-1'];
+		foreach ( $active_widgets as $active_widget ) {
+			if ( strpos( $active_widget, $widget_id ) !== false ) {
+				return;
+			}
+		}
+		PHPUnit_Framework_Assert::fail( "Widget '$widget_id' is not contained in '" . implode(', ', $active_widgets ) . "'" );
+	}
+
 
 	/**
 	 * @Given /^the image "([^"]*)" exists in the upload folder$/

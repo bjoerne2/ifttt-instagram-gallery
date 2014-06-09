@@ -27,6 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 require_once( plugin_dir_path( __FILE__ ) . 'public/class-ifttt-instagram-gallery.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'public/class-ifttt-instagram-gallery-widget.php' );
 
 add_action( 'plugins_loaded', array( 'Ifttt_Instagram_Gallery', 'get_instance' ) );
 

@@ -92,6 +92,23 @@ trait DatabaseSteps {
 	}
 
 	/**
+	 * @Given /the widget "([^"]*)" is activated$/
+	 */
+	public function activate_widget( $widget_id ) {
+		$pdo  = $this->create_pdo();
+		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
+		$stmt->execute( array( ':option_name' => 'sidebars_widgets' ) );
+		$result = $this->fetch_all( $stmt );
+		assertEquals( count( $result ), 1, "Option 'sidebars_widgets' doesn't exists" );
+		$unserialized_option_value = unserialize( $result[0]['option_value'] );
+		$unserialized_option_value['sidebar-1'][] = "$widget_id-2";
+		$serialized_option_value   = serialize( $unserialized_option_value );
+		$stmt = $pdo->prepare( 'UPDATE wp_options SET option_value = :option_value WHERE option_name = :option_name' );
+		$stmt->execute( array( ':option_name' => 'sidebars_widgets', ':option_value' => $serialized_option_value ) );
+		$this->set_serialized_option( "widget_$widget_id", '{"2":[],"_multiwidget":1}' );
+	}
+
+	/**
 	 * @Given /the option "([^"]*)" should be serialized and contain (.*)$/
 	 */
 	public function assert_serialized_option_contains_value( $option_name, $option_value ) {

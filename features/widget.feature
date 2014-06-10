@@ -22,8 +22,29 @@ Feature: Display instragram images in widget
       | wrapper_width  |           |
       | images_per_row | 3         |
       | image_size     | thumbnail |
-      | random         |           |
       | num_of_images  |           |
+  
+  Scenario: Configure widget
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
+    And I am logged as an administrator
+    When I go to "http://localhost/wordpress-behat/wp-admin/widgets.php"
+    And I activate the widget "ifttt-instagram-gallery"
+    And I fill in "widget-ifttt-instagram-gallery-2-title" with "My Instagram"
+    And I fill in "widget-ifttt-instagram-gallery-2-wrapper_width" with "777px"
+    And I fill in "widget-ifttt-instagram-gallery-2-images_per_row" with "5"
+    And I fill in "widget-ifttt-instagram-gallery-2-image_size" with "large"
+    And I check "widget-ifttt-instagram-gallery-2-random"
+    And I fill in "widget-ifttt-instagram-gallery-2-num_of_images" with "11"
+    And I press "widget-ifttt-instagram-gallery-2-savewidget"
+    And I wait for 2 second
+    And the widget "widget_ifttt-instagram-gallery" should have the options
+      | title          | My Instagram |
+      | wrapper_width  | 777px        |
+      | images_per_row | 5            |
+      | image_size     | large        |
+      | random         | true         |
+      | num_of_images  | 11           |
 
   Scenario: Display images
     Given a fresh WordPress is installed

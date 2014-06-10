@@ -36,6 +36,6 @@ if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) {
 	add_action( 'plugins_loaded', array( 'Ifttt_Instagram_Gallery_Admin', 'get_instance' ) );
 }
 
-function ifttt_instagram_gallery_images( $options = array() ) {
+function ifttt_instagram_gallery( $options = array() ) {
 	Ifttt_Instagram_Gallery::get_instance()->display_images( $options );
 }

@@ -18,7 +18,7 @@ Feature: Display instragram images via shortcode
       | Url       | http://example.com |
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
-    And the hello world post has the content "[ifttt_instagram_gallery_images]"
+    And the hello world post has the content "[ifttt_instagram_gallery]"
     When I go to "/"
     Then I should see images with titles
       | Another Instagram image |
@@ -37,7 +37,7 @@ Feature: Display instragram images via shortcode
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked <num_of_images> times
-    And the hello world post has the content "[ifttt_instagram_gallery_images wrapper_width=600px images_per_row=<images_per_row>]"
+    And the hello world post has the content "[ifttt_instagram_gallery wrapper_width=600px images_per_row=<images_per_row>]"
     When I go to "/"
     Then I should see images with
       | number of images | <num_of_images> |
@@ -75,7 +75,7 @@ Feature: Display instragram images via shortcode
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
-    And the hello world post has the content "[ifttt_instagram_gallery_images]"
+    And the hello world post has the content "[ifttt_instagram_gallery]"
     When I go to "/"
     Then I should see image file "ifttt_instagram_test_image-150x150.jpg"
 
@@ -87,7 +87,7 @@ Feature: Display instragram images via shortcode
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
-    And the hello world post has the content "[ifttt_instagram_gallery_images image_size=<image_size>]"
+    And the hello world post has the content "[ifttt_instagram_gallery image_size=<image_size>]"
     When I go to "/"
     Then I should see image file "<image_file>"
     Examples:
@@ -105,7 +105,7 @@ Feature: Display instragram images via shortcode
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked 2 times
-    And the hello world post has the content "[ifttt_instagram_gallery_images num_of_images=1]"
+    And the hello world post has the content "[ifttt_instagram_gallery num_of_images=1]"
     When I go to "/"
     Then I should see images with
       | number of images | 1 |
@@ -118,7 +118,7 @@ Feature: Display instragram images via shortcode
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked 10 times
-    And the hello world post has the content "[ifttt_instagram_gallery_images random=true]"
+    And the hello world post has the content "[ifttt_instagram_gallery random=true]"
     When I go to "/"
     And I should see images with
       | number of images | 10 |
@@ -142,7 +142,7 @@ Feature: Display instragram images via shortcode
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked 20 times
-    And the hello world post has the content "[ifttt_instagram_gallery_images random=true num_of_images=10]"
+    And the hello world post has the content "[ifttt_instagram_gallery random=true num_of_images=10]"
     When I go to "/"
     And I should see images with
       | number of images | 10 |

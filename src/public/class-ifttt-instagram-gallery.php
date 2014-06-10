@@ -63,8 +63,8 @@ class Ifttt_Instagram_Gallery {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_action( 'ifttt_wordpress_bridge', array( $this, 'load_instagram_image' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-    add_action( 'widgets_init', array($this, 'register_widget' ));
-		add_shortcode( 'ifttt_instagram_gallery_images', array( $this, 'images_shortcode' ) );
+		add_action( 'widgets_init', array( $this, 'register_widget' ) );
+		add_shortcode( 'ifttt_instagram_gallery', array( $this, 'ifttt_instagram_gallery_shortcode' ) );
 	}
 
 	/**
@@ -198,7 +198,7 @@ class Ifttt_Instagram_Gallery {
 	 *
 	 * @since   1.0.0
 	 */
-	public function images_shortcode( $attr, $content = null ) {
+	public function ifttt_instagram_gallery_shortcode( $attr, $content = null ) {
 		if ( $attr ) {
 			return $this->get_images( $attr );
 		} else {

@@ -229,25 +229,20 @@ class Ifttt_Instagram_Gallery {
 				$options[$key] = false;
 			}
 		}
-		$defaults = array(
-			'wrapper_width' => false,
-			'images_per_row' => 3,
-			'image_size' => 'thumbnail',
-		);
-		$this->options = array_merge( $defaults, $options );
-		$query_args    = array(
+		$this->merge_default_display_options( $options );
+		$query_args = array(
 			'meta_key' => '_ifttt_instagram',
 			'post_type' => 'attachment',
 			'post_status' => 'inherit',
 			'posts_per_page' => -1,
 			'orderby' => 'ID DESC',
 		);
-		if ( array_key_exists( 'num_of_images', $this->options ) && ! @$options['random'] ) {
+		if ( $options['num_of_images'] && ! $options['random'] ) {
 			$query_args['posts_per_page'] = $options['num_of_images'];
 		}
 		$query = new WP_Query( $query_args );
-		if ( @$options['random'] ) {
-			if ( array_key_exists( 'num_of_images', $this->options ) ) {
+		if ( $options['random'] ) {
+			if ( $options['num_of_images'] ) {
 				$num_of_images = $options['num_of_images'];
 			} else {
 				$num_of_images = count( $query->posts );
@@ -272,29 +267,45 @@ class Ifttt_Instagram_Gallery {
 			$ids[] = $post->ID;
 		}
 		update_postmeta_cache( $ids );
-		$this->images = array();
+		$images = array();
 		foreach ( $posts as $post ) {
 			$full_image_url = $post->guid;
-			if ( 'full' == $this->options['image_size'] ) {
+			if ( 'full' == $options['image_size'] ) {
 				$image_url = $full_image_url;
 			} else {
 				$attachment_metadata = wp_get_attachment_metadata( $post->ID );
-				if ( array_key_exists( $this->options['image_size'] , $attachment_metadata['sizes'] ) ) {
-					$image_url = substr_replace( $full_image_url, $attachment_metadata['sizes'][$this->options['image_size']]['file'], strrpos(  $full_image_url, '/' ) + 1 );
+				if ( array_key_exists( $options['image_size'] , $attachment_metadata['sizes'] ) ) {
+					$image_url = substr_replace( $full_image_url, $attachment_metadata['sizes'][$options['image_size']]['file'], strrpos(  $full_image_url, '/' ) + 1 );
 				} else {
 					$image_url = $full_image_url;
 				}
 			}
-			$custom_values  = get_post_custom_values( '_ifttt_instagram', $post->ID );
-			$this->images[] = array(
+			$custom_values = get_post_custom_values( '_ifttt_instagram', $post->ID );
+			$images[] = array(
 				'instagram_url' => unserialize( $custom_values[0] )['url'],
 				'image_url' => $image_url,
 				'title' => $post->post_content,
 			);
 		}
 		ob_start();
-		include( 'views/images.php' );
+		include( plugin_dir_path( __FILE__ ) . 'views/images.php' );
 		return ob_get_clean();
+	}
+
+	/**
+	 * Merges default values in options.
+	 *
+	 * @since   1.0.0
+	 */
+	public function merge_default_display_options( &$options ) {
+		$defaults = array(
+			'wrapper_width' => false,
+			'images_per_row' => 3,
+			'image_size' => 'thumbnail',
+			'random' => false,
+			'num_of_images' => false,
+		);
+		$options = array_merge( $defaults, $options );
 	}
 
 	/**
@@ -303,7 +314,7 @@ class Ifttt_Instagram_Gallery {
 	 * @since   1.0.0
 	 */
 	public function register_widget() {
-    register_widget( 'Ifttt_Instagram_Gallery_Widget' );    
+		register_widget( 'Ifttt_Instagram_Gallery_Widget' );    
 	}
 }
 

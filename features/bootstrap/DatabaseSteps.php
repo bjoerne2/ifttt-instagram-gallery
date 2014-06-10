@@ -92,9 +92,9 @@ trait DatabaseSteps {
 	}
 
 	/**
-	 * @Given /the widget "([^"]*)" is activated$/
+	 * @Given /the widget "([^"]*)" is activated( with the options)?$/
 	 */
-	public function activate_widget( $widget_id ) {
+	public function activate_widget( $widget_id, $with_options_expr = null, $table = null ) {
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'sidebars_widgets' ) );
@@ -105,7 +105,38 @@ trait DatabaseSteps {
 		$serialized_option_value   = serialize( $unserialized_option_value );
 		$stmt = $pdo->prepare( 'UPDATE wp_options SET option_value = :option_value WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'sidebars_widgets', ':option_value' => $serialized_option_value ) );
-		$this->set_serialized_option( "widget_$widget_id", '{"2":[],"_multiwidget":1}' );
+
+		$widget_options = array( '2' => array(), '_multiwidget' => 1 );
+		if ( $table ) {
+			$widget_options['2'] = $table->getRowsHash();
+		}
+		$this->set_option( "widget_$widget_id", serialize( $widget_options ) );
+	}
+
+	/**
+	 * @Given /the widget "([^"]*)" should have the options$/
+	 */
+	public function assert_widget_options( $widget, $table ) {
+		$rows_hash = $table->getRowsHash();
+		$pdo  = $this->create_pdo();
+		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
+		$stmt->execute( array( ':option_name' => 'widget_ifttt-instagram-gallery' ) );
+		$result = $this->fetch_all( $stmt );
+		assertEquals( count( $result ), 1, "Option 'widget_ifttt-instagram-gallery' doesn't exists" );
+		$unserialized   = unserialize( $result[0]['option_value'] );
+		$widget_options = $unserialized['2'];
+		foreach ( $rows_hash as $expected_key => $expected_value ) {
+			foreach ( $widget_options as $widget_options_key => $widget_options_value ) {
+				if ( $expected_key == $widget_options_key && $expected_value == $widget_options_value ) {
+					continue 2;
+				}
+			}
+			if ( array_key_exists( $expected_key, $widget_options) ) {
+				PHPUnit_Framework_Assert::fail( "Widget option $expected_key' exists but has the value '$widget_options[$expected_key]'" );
+			} else {
+				PHPUnit_Framework_Assert::fail( "Widget option $expected_key' doesn't exists" );
+			}
+		}
 	}
 
 	/**
@@ -210,7 +241,6 @@ trait DatabaseSteps {
 		}
 		PHPUnit_Framework_Assert::fail( "Widget '$widget_id' is not contained in '" . implode(', ', $active_widgets ) . "'" );
 	}
-
 
 	/**
 	 * @Given /^the image "([^"]*)" exists in the upload folder$/

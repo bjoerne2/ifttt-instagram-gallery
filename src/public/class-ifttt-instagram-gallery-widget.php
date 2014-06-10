@@ -19,22 +19,56 @@
  */
 class Ifttt_Instagram_Gallery_Widget extends WP_Widget {
 
-  public function __construct() {
-    $plugin = Ifttt_Instagram_Gallery::get_instance();
-    $this->plugin_slug = $plugin->get_plugin_slug();
+	public function __construct() {
+		$plugin = Ifttt_Instagram_Gallery::get_instance();
+		$this->widget_slug = $plugin->get_plugin_slug();
 
-    parent::__construct( 'ifttt-instagram-gallery', 'Instagram Gallery', array( 'description' => _x( 'Displays all instagram images', 'Widget description', $this->plugin_slug ) ) );
-  }
+		parent::__construct( $this->widget_slug, 'Instagram Gallery', array( 'description' => _x( 'Displays all instagram images', 'Widget description', $this->widget_slug ) ) );
+		
+		add_action( 'save_post', array( $this, 'flush_widget_cache' ) );
+		add_action( 'deleted_post', array( $this, 'flush_widget_cache' ) );
+		add_action( 'switch_theme', array( $this, 'flush_widget_cache' ) );
+	}
 
-  public function widget( $args, $instance ) {
-    $title = _x( 'Instagram', 'Widget title', $this->plugin_slug );
-    $title = apply_filters( 'widget_title', $title );
-  // before and after widget arguments are defined by themes
-    echo $args['before_widget'];
-    if ( ! empty( $title ) ) {
-      echo $args['before_title'] . $title . $args['after_title'];
-    }
-    Ifttt_Instagram_Gallery::get_instance()->display_images(); // TODO options
-    echo $args['after_widget'];
-  }
+	public function widget( $args, $instance ) {
+		$cache = wp_cache_get( $this->widget_slug, 'widget' );
+		if ( ! is_array( $cache ) ) {
+			$cache = array();
+		}
+		$widget_id = array_key_exists( 'widget_id', $args ) ? $args['widget_id'] : $this->id;
+		if ( array_key_exists( $widget_id, $cache ) ) {
+			return print $cache[ $widget_id ];
+		}
+		$title  = _x( 'Instagram', 'Widget title', $this->widget_slug );
+		$title  = apply_filters( 'widget_title', $title );
+		$images = Ifttt_Instagram_Gallery::get_instance()->get_images( $instance );
+		extract( $args, EXTR_SKIP );
+
+		ob_start();
+		include( plugin_dir_path( __FILE__ ) . 'views/widget.php' );
+		$output = ob_get_clean();
+
+		$cache[$widget_id] = $output;
+		wp_cache_set( $this->widget_slug, $cache, 'widget' );
+
+		echo $output;
+	}
+
+	/**
+	 * Back-end widget form.
+	 *
+	 * @see WP_Widget::form()
+	 *
+	 * @param array $instance Previously saved values from database.
+	 */
+	public function form( $instance ) {
+		Ifttt_Instagram_Gallery::get_instance()->merge_default_display_options( $instance );
+		$instance['title'] = @$instance['title'] ?: '';
+		extract( $instance, EXTR_SKIP );
+		include( plugin_dir_path( __FILE__ ) . 'views/widget-form.php' );
+	}
+
+	public function flush_widget_cache() {
+		wp_cache_delete( $this->widget_slug, 'widget' );
+	}
 }

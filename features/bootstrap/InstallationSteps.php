@@ -37,6 +37,14 @@ trait InstallationSteps {
 	}
 
 	/**
+	 * @Given /^the plugin "([^"]*)" is installed and activated$/
+	 */
+	public function install_and_activate_plugin( $plugin_id ) {
+		$this->install_plugin( $plugin_id );
+		$this->activate_plugin( $plugin_id );
+	}
+
+	/**
 	 * @Given /^the plugin "([^"]*)" is installed and activated \(from ([^\)]*)\)$/
 	 */
 	public function install_and_activate_plugin_from_src( $plugin_id, $source ) {
@@ -77,7 +85,6 @@ trait InstallationSteps {
 		}
 		$this->copy_file_or_dir( $source_path, $this->path( $this->webserver_dir, 'wp-content', 'themes', $target_file_or_dir_name ) );
 	}
-
 
 	/**
 	 * @Given /^the plugin "([^"]*)" is installed$/

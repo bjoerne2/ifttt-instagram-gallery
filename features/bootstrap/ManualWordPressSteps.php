@@ -52,12 +52,35 @@ trait ManualWordPressSteps {
 		$widget_div = $this->get_page()->find( 'xpath', "//div[contains(@id, '$widget_id')]" );
 		$widget_div->find( 'css', 'h4' )->click();
 		$widget_div_id = $widget_div->getAttribute( 'id' );
-		$this->getSession()->wait( 5000, "jQuery('#$widget_div_id .widgets-chooser').length == 1");
+		$this->getSession()->wait( 5000, "jQuery('#$widget_div_id .widgets-chooser').length == 1" );
 		$this->get_page()->pressButton( 'Add Widget' );
 		$sidebar = $this->get_page()->find( 'css', '#sidebar-1' );
-		$widget_div = $sidebar->find( 'xpath', "//div[contains(@id, '$widget_id')]" );
+		$widget_div    = $sidebar->find( 'xpath', "//div[contains(@id, '$widget_id')]" );
 		$widget_div_id = $widget_div->getAttribute( 'id' );
 		sleep( 1 );
+	}
+
+	/**
+	 * @When /^I activate permalinks$/
+	 */
+	public function activate_permalinks() {
+		file_put_contents( $this->path( $this->webserver_dir, '.htaccess' ), "Options +FollowSymLinks\n" );
+		$this->visit( '/wp-admin/options-permalink.php' );
+		$this->check_radio_button( 'Post name' );
+		$this->pressButton( 'Save Changes' );
+	}
+
+	/**
+	 * @When /^I check the "([^"]*)" radio button$/
+	 */
+	public function check_radio_button( $label_text ) {
+		foreach ( $this->get_page()->findAll( 'css', 'label' ) as $label ) {
+			if ( $label_text === $label->getText() && $label->has( 'css', 'input[type="radio"]' ) ) {
+				$this->getMainContext()->fillField( $label->find( 'css', 'input[type="radio"]' )->getAttribute( 'name' ), $label->find( 'css', 'input[type="radio"]' )->getAttribute( 'value' ) );
+				return;
+			}
+		}
+		throw new Exception( 'Radio button not found' );
 	}
 
 	/**
@@ -127,30 +150,40 @@ trait ManualWordPressSteps {
 		}
 		$js = "(function(){wrapper=jQuery('.ifttt-instagram-images');return JSON.stringify(jQuery(wrapper).find('img').map(function(){return{width:jQuery(this).innerWidth(),top:jQuery(this).position().top-jQuery(wrapper).position().top,left:jQuery(this).position().left-jQuery(wrapper).position().left};}).get())})();";
 		$result     = $this->getSession()->evaluateScript( $js );
-		$idx_in_row = -1;
-		$last_top   = -1;
+		$last_idx_in_row = -1;
+		$last_top = -1;
+		$last_row_width  = -1;
 		foreach ( json_decode( $result, true ) as $image_info ) {
-			if ( $last_top == $image_info['top'] ) {
-				$idx_in_row++;
+			$row_width = $image_info['left'] + $image_info['width'];
+			if ( array_key_exists( 'row width <=', $rows_hash ) ) {
+				assertTrue( $row_width <= intval( $rows_hash['row width <='] ), "Row width $row_width not <= " . $rows_hash['row width >='] );
+			}
+			if ( $last_idx_in_row == -1 ) {
+				// first loop
+				$idx_in_row = 0;
+				assertEquals( 0, $image_info['top'] );
+				assertEquals( 0, $image_info['left'] );
+			} elseif ( $last_top == $image_info['top'] ) {
+				// same row as predecessor
+				$idx_in_row = $last_idx_in_row + 1;
 				if ( array_key_exists( 'maximum per row', $rows_hash ) ) {
 					assertTrue( $idx_in_row < intval( $rows_hash['maximum per row'] ), 'Too many images in one row' );
-					if ( $idx_in_row == intval( $rows_hash['maximum per row'] ) - 1 ) {
-						$row_width = $image_info['left'] + $image_info['width'];
-						if ( array_key_exists( 'row width >=', $rows_hash ) ) {
-							assertTrue( $row_width >= intval( $rows_hash['row width >='] ), "Row width $row_width not >= " . $rows_hash['row width >='] );
-						}
-						if ( array_key_exists( 'row width <=', $rows_hash ) ) {
-							assertTrue( $row_width <= intval( $rows_hash['row width <='] ), "Row width $row_width not <= " . $rows_hash['row width >='] );
-						}
-					}
 				}
 			} else {
-				if ( array_key_exists( 'maximum per row', $rows_hash ) ) {
-					assertTrue( $idx_in_row == -1 || $idx_in_row == intval( $rows_hash['maximum per row'] ) - 1, 'Too less images in one row' );
-				}
+				// new row
 				$idx_in_row = 0;
-				$last_top   = $image_info['top'];
+				if ( array_key_exists( 'maximum per row', $rows_hash ) ) {
+					assertTrue( $last_idx_in_row == intval( $rows_hash['maximum per row'] ) - 1, 'Too less images in one row' );
+				}
+				if ( array_key_exists( 'row width >=', $rows_hash ) ) {
+					assertTrue( $last_row_width >= intval( $rows_hash['row width >='] ), "Row width $last_row_width not >= " . $rows_hash['row width >='] );
+				}
 			}
+			$last_idx_in_row = $idx_in_row;
+			$last_top = $image_info['top'];
+			$last_row_width  = $row_width;
+			unset($idx_in_row);
+			unset($row_width);
 		}
 	}
 

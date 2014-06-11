@@ -10,7 +10,7 @@ Feature: Remove old images
     And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
-    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked 2 times
     And I am logged as an administrator
     When I go to "/wp-admin/options-general.php?page=ifttt-instagram-gallery.php"
@@ -47,7 +47,7 @@ Feature: Remove old images
     And the option "ifttt_instagram_gallery_options" has the serialized value {"keep_max_images":1}
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
-    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked 2 times
     And I am logged as an administrator
     When I go to "/"

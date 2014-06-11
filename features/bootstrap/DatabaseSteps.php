@@ -243,7 +243,7 @@ trait DatabaseSteps {
 	}
 
 	/**
-	 * @Given /^the image "([^"]*)" exists in the upload folder$/
+	 * @Given /^the file "([^"]*)" exists in the upload folder$/
 	 */
 	public function assert_image_exists_in_upload_folder( $image ) {
 		assertTrue( file_exists( $this->path( $this->webserver_dir, 'wp-content', 'uploads', $image ) ), "Image '$image' not found in upload folder" );

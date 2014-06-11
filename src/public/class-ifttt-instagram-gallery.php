@@ -116,24 +116,52 @@ class Ifttt_Instagram_Gallery {
 		$title          = $content_struct['title'];
 		$description    = $content_struct['description'];
 		$description_decoded = json_decode( $description, true ); 
-		$instagram_url = $description_decoded['Url'];
-		$image_url     = $description_decoded['SourceUrl'];
-		$filename      = $this->get_filename( $image_url );
-		$bits = $this->get_remote_file_content( $image_url );
+		$instagram_url  = $this->get_final_url( $description_decoded['Url'] );
+		$image_url      = $this->get_final_url( $description_decoded['SourceUrl'] );
+		$filename       = $this->get_filename( $image_url );
+		$response       = wp_remote_get( $image_url );
+		$bits = $response['body'];
 		$this->upload_image( $filename, $title, $bits, $instagram_url );
 		$this->remove_old_images();
 	}
 
+	/**
+	 * Follows redirects and returns the final url.
+	 *
+	 * @since   1.0.0
+	 */
+	private function get_final_url( $url ) {
+		for ( $i = 0; $i < 5; $i++ ) {
+			$response = wp_remote_head( $url, array( 'redirection' => 0 ) );
+			$reponse_code = wp_remote_retrieve_response_code( $response );
+			if ( preg_match( '/^30.$/', $reponse_code ) ) {
+				$url = wp_remote_retrieve_header( $response, 'location' );
+				if ( ! $url ) {
+					throw new Exception( 'No redirect url found in Location header' );
+				}
+			} elseif ( preg_match( '/^20.$/', $reponse_code ) ) {
+				return $url;
+			} else {
+				throw new Exception( "Unexpected response code: $reponse_code" );
+			}
+		}
+	}
+
+	/**
+	 * Gets the filename from a url. It returns te part after the last slash.
+	 *
+	 * @since   1.0.0
+	 */
 	private function get_filename( $image_url ) {
 		preg_match( '/[^\\/]*$/', $image_url, $matches );
 		return $matches[0];
 	}
 
-	private function get_remote_file_content( $image_url ) {
-		$response = wp_remote_get( $image_url );
-		return $response['body'];
-	}
-
+	/**
+	 * Uploads the image into WordPress.
+	 *
+	 * @since   1.0.0
+	 */
 	private function upload_image( $name, $content, $bits, $instagram_url ) {
 		// Copied and modified from /wp-includes/class-wp-xmlrpc-server.php
 		$upload     = wp_upload_bits( $name, null, $bits );

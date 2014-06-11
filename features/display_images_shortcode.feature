@@ -7,7 +7,7 @@ Feature: Display instragram images via shortcode
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
-    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Caption   | An Instagram image |
       | Url       | http://example.com |
@@ -33,7 +33,7 @@ Feature: Display instragram images via shortcode
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
-    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked <num_of_images> times
@@ -71,7 +71,7 @@ Feature: Display instragram images via shortcode
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
-    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
@@ -83,7 +83,7 @@ Feature: Display instragram images via shortcode
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
-    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
@@ -101,7 +101,7 @@ Feature: Display instragram images via shortcode
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
-    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked 2 times
@@ -114,7 +114,7 @@ Feature: Display instragram images via shortcode
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
-    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked 10 times
@@ -138,7 +138,7 @@ Feature: Display instragram images via shortcode
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
-    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked 20 times

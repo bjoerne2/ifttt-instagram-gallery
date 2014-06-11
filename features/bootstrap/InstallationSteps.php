@@ -97,7 +97,7 @@ trait InstallationSteps {
 	}
 
 	/**
-	 * @Given /^the image "([^"]*)" is copied to the webserver$/
+	 * @Given /^the file "([^"]*)" is copied to the webserver$/
 	 */
 	public function copy_image_to_webserver( $image ) {
 		$this->copy_file_or_dir( $this->path( dirname( dirname( __FILE__ ) ), 'resources', $image ), $this->path( $this->webserver_dir, $image ) );

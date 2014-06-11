@@ -8,7 +8,7 @@ Feature: Display instragram images via PHP function
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)
     And the plugin "ifttt-instagram-gallery-testplugin" is installed and activated (from features/plugins/ifttt-instagram-gallery-testplugin.php)
     And the theme "ifttt-instagram-gallery-testtheme" is installed and activated (from features/themes/ifttt-instagram-gallery-testtheme)
-    And the image "ifttt_instagram_test_image.jpg" is copied to the webserver
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Caption   | An Instagram image |
       | Url       | http://example.com |

@@ -23,7 +23,7 @@ class Ifttt_Instagram_Gallery_Widget extends WP_Widget {
 		$plugin = Ifttt_Instagram_Gallery::get_instance();
 		$this->widget_slug = $plugin->get_plugin_slug();
 
-		parent::__construct( $this->widget_slug, 'Instagram Gallery', array( 'description' => _x( 'Displays all instagram images', 'Widget description', $this->widget_slug ) ) );
+		parent::__construct( $this->widget_slug, 'IFTTT Instagram Gallery', array( 'description' => _x( 'Displays instagram images imported via IFTTT', 'Widget description', $this->widget_slug ) ) );
 		
 		add_action( 'save_post', array( $this, 'flush_widget_cache' ) );
 		add_action( 'deleted_post', array( $this, 'flush_widget_cache' ) );

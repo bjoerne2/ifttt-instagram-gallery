@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: ifttt-instagram-gallery 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-14 03:01+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/admin/class-ifttt-instagram-gallery-admin.php:91
+#: src/admin/class-ifttt-instagram-gallery-admin.php:92
+msgid "IFTTT Instagram Gallery"
+msgstr ""
+
+#: src/admin/class-ifttt-instagram-gallery-admin.php:135
+#, php-format
+msgctxt "Error message"
+msgid "Invalid value for '%s'. Must be a positive integer."
+msgstr ""
+
+#: src/admin/class-ifttt-instagram-gallery-admin.php:136
+msgid "Maximum numbers of images to keep"
+msgstr ""
+
+#: src/admin/class-ifttt-instagram-gallery-admin.php:154
+msgid "Settings"
+msgstr ""
+
+#: src/admin/views/admin.php:29
+msgctxt "Form field description"
+msgid ""
+"If you configure a lower number than the current number of images the "
+"current images are removed accordingly"
+msgstr ""
+
+#: src/admin/views/admin.php:34
+msgctxt "Form field description"
+msgid ""
+"If you want take care of css in your theme you can uncheck this option to "
+"skip the loading of the css file"
+msgstr ""
+
+#: src/public/class-ifttt-instagram-gallery-widget.php:26
+msgctxt "Widget description"
+msgid "Displays instagram images imported via IFTTT"
+msgstr ""
+
+#: src/public/class-ifttt-instagram-gallery-widget.php:42
+msgctxt "Widget title"
+msgid "Instagram"
+msgstr ""
+
+#: src/public/class-ifttt-instagram-gallery-widget.php:71
+msgid "Thumbnail"
+msgstr ""
+
+#: src/public/class-ifttt-instagram-gallery-widget.php:75
+msgid "Medium"
+msgstr ""
+
+#: src/public/class-ifttt-instagram-gallery-widget.php:79
+msgid "Large"
+msgstr ""
+
+#: src/public/class-ifttt-instagram-gallery-widget.php:83
+msgid "Full Size"
+msgstr ""
+
+#: src/public/views/widget-form.php:2
+#, php-format
+msgctxt "Widget option"
+msgid "Title (default: %s):"
+msgstr ""
+
+#: src/public/views/widget-form.php:2
+msgctxt "Default widget title"
+msgid "Instagram"
+msgstr ""
+
+#: src/public/views/widget-form.php:6
+msgctxt "Widget option"
+msgid "Wrapper width:"
+msgstr ""
+
+#: src/public/views/widget-form.php:10
+msgctxt "Widget option"
+msgid "Images per row:"
+msgstr ""
+
+#: src/public/views/widget-form.php:18
+msgctxt "Widget option"
+msgid "Image size:"
+msgstr ""
+
+#: src/public/views/widget-form.php:26
+msgctxt "Widget option"
+msgid "Number of images:"
+msgstr ""
+
+#: src/public/views/widget-form.php:31
+msgctxt "Widget option"
+msgid "Show images in random order"
+msgstr ""
+
+
+#: Project description
+msgid "When using IFTTT with WordPress you can just post new posts. This plugin helps you to do whatever you like. Configure your IFTTT job in a predefined way in you get any information you like in a WordPress action."
+msgstr ""

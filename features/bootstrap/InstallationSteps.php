@@ -220,19 +220,30 @@ trait InstallationSteps {
 	}
 
 	private function delete_file_or_dir( $file_or_dir ) {
-		if ( is_file( $file_or_dir ) ) {
-			if ( ! unlink( $file_or_dir ) ) {
-				throw new Exception( 'Can\'t delete file '.$file_or_dir );
-			}
-		} else {
-			foreach ( scandir( $file_or_dir ) as $found ) {
-				if ( $found == '.' || $found == '..' ) {
-					continue;
+		for ( $i = 0; $i < 5; $i++ ) {
+			try {
+				if ( is_file( $file_or_dir ) ) {
+					if ( ! unlink( $file_or_dir ) ) {
+						throw new Exception( 'Can\'t delete file '.$file_or_dir );
+					}
+				} else {
+					foreach ( scandir( $file_or_dir ) as $found ) {
+						if ( $found == '.' || $found == '..' ) {
+							continue;
+						}
+						$this->delete_file_or_dir( $this->path( $file_or_dir, $found ) );
+					}
+					if ( ! rmdir( $file_or_dir ) ) {
+						throw new Exception( 'Can\'t delete directory '.$file_or_dir );
+					}
 				}
-				$this->delete_file_or_dir( $this->path( $file_or_dir, $found ) );
-			}
-			if ( ! rmdir( $file_or_dir ) ) {
-				throw new Exception( 'Can\'t delete directory '.$file_or_dir );
+				return;
+			} catch (Exception $e) {
+				if ( 4 == $i ) {
+					throw $e;
+				} else {
+					sleep( 1 );
+				}
 			}
 		}
 	}

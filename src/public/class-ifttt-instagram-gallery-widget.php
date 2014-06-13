@@ -65,6 +65,23 @@ class Ifttt_Instagram_Gallery_Widget extends WP_Widget {
 		Ifttt_Instagram_Gallery::get_instance()->merge_default_display_options( $instance );
 		$instance['title'] = @$instance['title'] ?: '';
 		extract( $instance, EXTR_SKIP );
+		$sizes = array();
+		$sizes[] = array(
+			'value' => 'thumbnail',
+			'text'  => __( 'Thumbnail' ) . ' - ' . get_option( 'thumbnail_size_w' ) . ' x ' .get_option( 'thumbnail_size_h' ),
+		);
+		$sizes[] = array(
+			'value' => 'medium',
+			'text'  => __( 'Medium' ) . ' - ' . get_option( 'medium_size_w' ) . ' x ' . get_option( 'medium_size_h' ),
+		);
+		$sizes[] = array(
+			'value' => 'large',
+			'text'  => __( 'Large' ) . ' - ' . get_option( 'large_size_w' ) . ' x ' . get_option( 'large_size_h' ),
+		);
+		$sizes[] = array(
+			'value' => 'full',
+			'text'  => __( 'Full Size' ),
+		);
 		include( plugin_dir_path( __FILE__ ) . 'views/widget-form.php' );
 	}
 

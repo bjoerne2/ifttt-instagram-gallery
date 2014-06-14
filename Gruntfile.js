@@ -15,7 +15,23 @@ module.exports = function(grunt) {
       }
     },
     replace: {
-      plugin_description: {
+      plugin_version_const: {
+        src: ['src/public/class-ifttt-instagram-gallery.php'],
+        overwrite: true,
+        replacements: [{
+          from: /(const VERSION = ')([^']*)(';)/,
+          to: '$1<%= grunt.config.get("pkg").version %>$3'
+        }]
+      },
+      plugin_version_comment: {
+        src: ['src/ifttt-instagram-gallery.php'],
+        overwrite: true,
+        replacements: [{
+          from: /(\* Version:[ ]*)([^ \n]*)/,
+          to: '$1<%= grunt.config.get("pkg").version %>'
+        }]
+      },
+      project_description_pot: {
         src: ['src/ifttt-instagram-gallery.php'],
         dest: 'build/project_description_pot.txt',             // destination directory or file
         replacements: [{
@@ -34,5 +50,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-pot');
   grunt.loadNpmTasks('grunt-text-replace');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.registerTask('wppot', ['pot', 'replace', 'concat']);
+  grunt.registerTask('default', ['pot', 'replace', 'concat']);
 };

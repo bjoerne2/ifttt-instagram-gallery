@@ -9,7 +9,7 @@ The official WordPress project is [http://wordpress.org/extend/plugins/ifttt-ins
 
 Plugin description
 ------------------
-When using IFTTT with WordPress you can just post new posts. This plugin helps you to do whatever you like. Configure your IFTTT job in a predefined way in you get any information you like in a WordPress action.
+Loads Instagram images into the blog triggered by IFTTT and the ifttt-wordpress-bridge action
 
 Build
 -----

@@ -5,11 +5,18 @@ Project description
 -------------------
 This plugin contains a WordPress plugin in a source folder and additional build and test resources. If you want to use the project files as a WordPress plugin use only the files in the **src** folder!
 
-The official WordPress project is [http://wordpress.org/extend/plugins/ifttt-instagram-gallery](http://wordpress.org/extend/plugins/ifttt-instagram-gallery).
-
 Plugin description
 ------------------
 Loads Instagram images into the blog triggered by IFTTT and the ifttt-wordpress-bridge action
+
+Installation
+------------
+1. Upload plugin to the `/wp-content/plugins/` directory
+1. Activate the plugin through the 'Plugins' menu in WordPress
+1. Configure IFTTT as shown in the screenshot below.
+1. Configure plugin (Settings -> IFTTT Instagram Gallery)
+
+![alt tag](https://raw.githubusercontent.com/bjoerne2/ifttt-instagram-gallery/master/src/assets/screenshot-1.png)
 
 Build
 -----

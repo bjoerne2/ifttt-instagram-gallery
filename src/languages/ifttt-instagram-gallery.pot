@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ifttt-instagram-gallery 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-14 15:30+0700\n"
+"POT-Creation-Date: 2014-06-14 17:16+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,15 +39,15 @@ msgstr ""
 #: src/admin/views/admin.php:29
 msgctxt "Form field description"
 msgid ""
-"If you configure a lower number than the current number of images the "
-"current images are removed accordingly"
+"If you configure this number and the number of Instagram images exceeds it, "
+"older images are deleted."
 msgstr ""
 
 #: src/admin/views/admin.php:34
 msgctxt "Form field description"
 msgid ""
-"If you want take care of css in your theme you can uncheck this option to "
-"skip the loading of the css file"
+"If you want take care of CSS in your WordPress theme, you can uncheck this "
+"option to skip the loading of the plugin's CSS file"
 msgstr ""
 
 #: src/public/class-ifttt-instagram-gallery-widget.php:26

@@ -5,70 +5,129 @@
 }
 .ifttt-instagram-images li {
   float: left;  
-  margin: 0 1px 1px 0;
+  margin: 0 2px 2px 0;
 }
-.ifttt-instagram-images img {
+.ifttt-instagram-images img, .entry-content .ifttt-instagram-images img, .widget .ifttt-instagram-images img {  
   display: block;
   border-radius: 0;
   box-shadow: none;
   width: 100%;
 }
 .ifttt-instagram-1-per-row li {
-  width: 98%;
+  width: 100%;
+  margin-right: 0;
 }
 .ifttt-instagram-2-per-row li {
   width: 49%;
 }
+.ifttt-instagram-2-per-row li:nth-child(2n) {
+  margin-right: 0;
+}
 .ifttt-instagram-3-per-row li {
-  width: 32.6666666666667%;
+  width: 32.4%;
+}
+.ifttt-instagram-3-per-row li:nth-child(3n) {
+  margin-right: 0;
 }
 .ifttt-instagram-4-per-row li {
-  width: 24.3%;
+  width: 23.9%;
+}
+.ifttt-instagram-4-per-row li:nth-child(4n) {
+  margin-right: 0;
 }
 .ifttt-instagram-5-per-row li {
-  width: 19.3%;
+  width: 18.98%;
+}
+.ifttt-instagram-5-per-row li:nth-child(5n) {
+  margin-right: 0;
 }
 .ifttt-instagram-6-per-row li {
-  width: 16.05%;
+  width: 15.62%;
+}
+.ifttt-instagram-6-per-row li:nth-child(6n) {
+  margin-right: 0;
 }
 .ifttt-instagram-7-per-row li {
-  width: 14.1%;
+  width: 13.88%;
+}
+.ifttt-instagram-7-per-row li:nth-child(7n) {
+  margin-right: 0;
 }
 .ifttt-instagram-8-per-row li {
-  width: 12.25%;
+  width: 12.15%;
+}
+.ifttt-instagram-8-per-row li:nth-child(8n) {
+  margin-right: 0;
 }
 .ifttt-instagram-9-per-row li {
-  width: 10.8888888888889%;
+  width: 10.65%;
+}
+.ifttt-instagram-9-per-row li:nth-child(9n) {
+  margin-right: 0;
 }
 .ifttt-instagram-10-per-row li {
-  width: 9.8%;
+  width: 9.55%;
+}
+.ifttt-instagram-10-per-row li:nth-child(10n) {
+  margin-right: 0;
 }
 .ifttt-instagram-11-per-row li {
-  width: 8.90909090909091%;
+  width: 8.6%;
+}
+.ifttt-instagram-11-per-row li:nth-child(11n) {
+  margin-right: 0;
 }
 .ifttt-instagram-12-per-row li {
-  width: 8.16666666666667%;
+  width: 7.9%;
+}
+.ifttt-instagram-12-per-row li:nth-child(12n) {
+  margin-right: 0;
 }
 .ifttt-instagram-13-per-row li {
-  width: 7.51%;
+  width: 7.25%;
+}
+.ifttt-instagram-13-per-row li:nth-child(13n) {
+  margin-right: 0;
 }
 .ifttt-instagram-14-per-row li {
-  width: 6.96%;
+  width: 6.7%;
+}
+.ifttt-instagram-14-per-row li:nth-child(14n) {
+  margin-right: 0;
 }
 .ifttt-instagram-15-per-row li {
-  width: 6.49%;
+  width: 6.2%;
+}
+.ifttt-instagram-15-per-row li:nth-child(15n) {
+  margin-right: 0;
 }
 .ifttt-instagram-16-per-row li {
-  width: 6.07%;
+  width: 5.8%;
+}
+.ifttt-instagram-16-per-row li:nth-child(16n) {
+  margin-right: 0;
 }
 .ifttt-instagram-17-per-row li {
-  width: 5.7%;
+  width: 5.4%;
+}
+.ifttt-instagram-17-per-row li:nth-child(17n) {
+  margin-right: 0;
 }
 .ifttt-instagram-18-per-row li {
-  width: 5.38%;
+  width: 5.1%;
+}
+.ifttt-instagram-18-per-row li:nth-child(18n) {
+  margin-right: 0;
 }
 .ifttt-instagram-19-per-row li {
-  width: 5.07%;
+  width: 4.8%;
+}
+.ifttt-instagram-19-per-row li:nth-child(19n) {
+  margin-right: 0;
 }
 .ifttt-instagram-20-per-row li {
-  width: 4.8%;
+  width: 4.55%;
+}
+.ifttt-instagram-20-per-row li:nth-child(20n) {
+  margin-right: 0;
+}

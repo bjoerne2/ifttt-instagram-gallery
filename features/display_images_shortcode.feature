@@ -40,32 +40,32 @@ Feature: Display instragram images via shortcode
     And the hello world post has the content "[ifttt_instagram_gallery wrapper_width=600px images_per_row=<images_per_row>]"
     When I go to "/"
     Then I should see images with
-      | number of images | <num_of_images> |
-      | row width >=     | 582 |
-      | row width <=     | 600 |
+      | number of images | <num_of_images>  |
+      | row width >=     | <min_row_width>  |
+      | row width <=     | 600              |
       | maximum per row  | <images_per_row> |
     Examples:
-        | num_of_images | images_per_row |
-        | 2             | 1              |
-        | 3             | 2              |
-        | 4             | 3              |
-        | 5             | 4              |
-        | 6             | 5              |
-        | 7             | 6              |
-        | 8             | 7              |
-        | 9             | 8              |
-        | 10            | 9              |
-        | 11            | 10             |
-        | 12            | 11             |
-        | 13            | 12             |
-        | 14            | 13             |
-        | 15            | 14             |
-        | 16            | 15             |
-        | 17            | 16             |
-        | 18            | 17             |
-        | 19            | 18             |
-        | 20            | 19             |
-        | 21            | 20             |
+        | num_of_images | images_per_row | min_row_width |
+        | 2             | 1              | 582           |
+        | 3             | 2              | 582           |
+        | 4             | 3              | 582           |
+        | 5             | 4              | 578           |
+        | 6             | 5              | 577           |
+        | 7             | 6              | 572           |
+        | 8             | 7              | 582           |
+        | 9             | 8              | 582           |
+        | 10            | 9              | 582           |
+        | 11            | 10             | 582           |
+        | 12            | 11             | 582           |
+        | 13            | 12             | 582           |
+        | 14            | 13             | 582           |
+        | 15            | 14             | 582           |
+        | 16            | 15             | 582           |
+        | 17            | 16             | 582           |
+        | 18            | 17             | 582           |
+        | 19            | 18             | 582           |
+        | 20            | 19             | 582           |
+        | 21            | 20             | 582           |
 
   Scenario: Display default image size
     Given a fresh WordPress is installed

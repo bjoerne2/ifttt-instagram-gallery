@@ -145,7 +145,7 @@ trait InstallationSteps {
 			if ( ! $source_handle ) {
 				throw new Exception( 'Can\'t read wp-config-sample.php' );
 			} 
-			if ( ! $source_handle ) {
+			if ( ! $target_handle ) {
 				throw new Exception( 'Can\'t write wp-config.php' );
 			} 
 			$db_config_started = false;

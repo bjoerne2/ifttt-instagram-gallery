@@ -3,38 +3,38 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ifttt-instagram-gallery 0.9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-11 15:25+0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2014-08-11 15:29+0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
 
 #: src/admin/class-ifttt-instagram-gallery-admin.php:91
 #: src/admin/class-ifttt-instagram-gallery-admin.php:92
 msgid "IFTTT Instagram Gallery"
-msgstr ""
+msgstr "IFTTT Instagram Gallery"
 
 #: src/admin/class-ifttt-instagram-gallery-admin.php:135
 #, php-format
 msgctxt "Error message"
 msgid "Invalid value for '%s'. Must be a positive integer."
-msgstr ""
+msgstr "Ungültiger Wert für '%s'. Positive Ganzzahl erwartet."
 
 #: src/admin/class-ifttt-instagram-gallery-admin.php:136
 msgid "Maximum numbers of images to keep"
-msgstr ""
+msgstr "Max. Anzahl gespeicherter Bilder"
 
 #: src/admin/class-ifttt-instagram-gallery-admin.php:154
 msgid "Settings"
-msgstr ""
+msgstr "Einstellungen"
 
 #: src/admin/views/admin.php:29
 msgctxt "Form field description"
@@ -42,6 +42,8 @@ msgid ""
 "If you configure this number and the number of Instagram images exceeds it, "
 "older images are deleted."
 msgstr ""
+"Wenn du hier eine Zahl setzt und die Anzahl der Bilder diese überschreitet, "
+"werden ältere Bilder gelöscht."
 
 #: src/admin/views/admin.php:34
 msgctxt "Form field description"
@@ -49,70 +51,77 @@ msgid ""
 "If you want take care of CSS in your WordPress theme, you can uncheck this "
 "option to skip the loading of the plugin's CSS file"
 msgstr ""
+"Falls du selbst Sorge für das Styling der Galerie tragen möchtest, kannst du "
+"diese Option deaktivieren und damit das Laden des Plugin-eigenen CSS "
+"unterbinden."
 
 #: src/public/class-ifttt-instagram-gallery-widget.php:26
 msgctxt "Widget description"
 msgid "Displays instagram images imported via IFTTT"
-msgstr ""
+msgstr "Zeigt Instagram Bilder an, die per IFTTT importiert wurden"
 
 #: src/public/class-ifttt-instagram-gallery-widget.php:42
 msgctxt "Widget title"
 msgid "Instagram"
-msgstr ""
+msgstr "Instagram"
 
 #: src/public/class-ifttt-instagram-gallery-widget.php:71
 msgid "Thumbnail"
-msgstr ""
+msgstr "Thumbnail"
 
 #: src/public/class-ifttt-instagram-gallery-widget.php:75
 msgid "Medium"
-msgstr ""
+msgstr "Mittel"
 
 #: src/public/class-ifttt-instagram-gallery-widget.php:79
 msgid "Large"
-msgstr ""
+msgstr "Groß"
 
 #: src/public/class-ifttt-instagram-gallery-widget.php:83
 msgid "Full Size"
-msgstr ""
+msgstr "Volle Größe"
 
 #: src/public/views/widget-form.php:2
 #, php-format
 msgctxt "Widget option"
 msgid "Title (default: %s):"
-msgstr ""
+msgstr "Title (Default: %s):"
 
 #: src/public/views/widget-form.php:2
 msgctxt "Default widget title"
 msgid "Instagram"
-msgstr ""
+msgstr "Instagram"
 
 #: src/public/views/widget-form.php:6
 msgctxt "Widget option"
 msgid "Wrapper width:"
-msgstr ""
+msgstr "Wrapper-Breite:"
 
 #: src/public/views/widget-form.php:10
 msgctxt "Widget option"
 msgid "Images per row:"
-msgstr ""
+msgstr "Bilder pro Zeile:"
 
 #: src/public/views/widget-form.php:18
 msgctxt "Widget option"
 msgid "Image size:"
-msgstr ""
+msgstr "Bildgröße:"
 
 #: src/public/views/widget-form.php:26
 msgctxt "Widget option"
 msgid "Number of images:"
-msgstr ""
+msgstr "Anzahl Bilder:"
 
 #: src/public/views/widget-form.php:31
 msgctxt "Widget option"
 msgid "Show images in random order"
-msgstr ""
-
+msgstr "Zeige Bilder in zufälliger Reihenfolge"
 
 #: Project description
-msgid "IFTTT Instagram Gallery is a highly configurable widget that automatically shares your latest Instagram pictures in an amazing looking photo grid on your WordPress blog."
+msgid ""
+"IFTTT Instagram Gallery is a highly configurable widget that automatically "
+"shares your latest Instagram pictures in an amazing looking photo grid on "
+"your WordPress blog."
 msgstr ""
+"IFTTT Instagram Gallery ist ein konfigurierbares Widget, das automatisch "
+"deine neuesten Instagram-Bilder in einem Foto-Raster darstellt."

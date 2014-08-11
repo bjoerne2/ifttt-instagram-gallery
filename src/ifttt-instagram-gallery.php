@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       IFTTT Instagram Gallery
  * Plugin URI:        http://www.bjoerne.com
- * Description:       Loads Instagram images into the blog triggered by IFTTT and the ifttt-wordpress-bridge action
+ * Description:       IFTTT Instagram Gallery is a highly configurable widget that automatically shares your latest Instagram pictures in an amazing looking photo grid on your WordPress blog.
  * Version:           0.9.0
  * Author:            Björn Weinbrenner
  * Author URI:        http://www.bjoerne.com/

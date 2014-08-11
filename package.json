@@ -1,7 +1,7 @@
 {
   "name": "ifttt-instagram-gallery",
   "version": "0.9.0",
-  "description": "Loads Instagram images into the blog triggered by IFTTT and the ifttt-wordpress-bridge action",
+  "description": "IFTTT Instagram Gallery is a highly configurable widget that automatically shares your latest Instagram pictures in an amazing looking photo grid on your WordPress blog.",
   "main": "index.js",
   "scripts": {
     "test": "bin/behat"

@@ -28,7 +28,7 @@ class Ifttt_Instagram_Gallery {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.9.0';
+	const VERSION = '1.0.0';
 
 	/**
 	 * Unique identifier for your plugin.

@@ -49,7 +49,7 @@ trait DatabaseSteps {
 				$additional_tags .= ',"' . $tag . '"';
 			}
 		}
-		$option_value = '{"title":"' . $caption . '","description":"{\"Url\":\"' . $url . '\",\"SourceUrl\":\"' . $source_url . '\"}","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"' . $additional_tags .']}';
+		$option_value = '{"title":"' . $caption . '","description":"{\"Url\":\"' . $url . '\",\"SourceUrl\":\"' . $source_url . '\"}","post_status":"draft","mt_keywords":["ifttt_bridge"' . $additional_tags .']}';
 		$option_value = str_replace( '__webserver_url__', $this->webserver_url, $option_value );
 		$this->set_serialized_option( $option_name, $option_value );
 	}

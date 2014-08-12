@@ -4,15 +4,15 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: ifttt, ifthisthenthat, instagram, gallery
 Requires at least: 3.9
 Tested up to: 3.9.2
-Stable tag: 1.0.0
+Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
-IFTTT Instagram Gallery is a highly configurable widget that automatically shares your latest Instagram pictures in an amazing looking photo grid on your WordPress blog.
+IFTTT Instagram Gallery is a highly configurable plugin that automatically shares your latest Instagram pictures in an amazing looking photo grid on your WordPress blog.
 
 == Description ==
 
-IFTTT Instagram Gallery is a highly configurable widget that will showcase your Instagram photos in an awesome tile pattern on your WordPress blog.
+IFTTT Instagram Gallery is a highly configurable plugin that will showcase your Instagram photos in an awesome tile pattern on your WordPress blog.
 
 Whenever you add a new photo to your Instagram feed, it will automatically appear on your WordPress blog.
 
@@ -20,6 +20,7 @@ The difference to standard IFTTT WordPress channels is that your Instagram photo
 
 *Your advantages:*
 
+* Display Instagram photos as widget, via shortcode in your articles or pages or via PHP function in your customized theme
 * Full control over image sizes
 * Fast load times
 * Highly customizable gallery layout

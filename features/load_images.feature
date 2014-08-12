@@ -12,7 +12,7 @@ Feature: Load images triggered by IFTTT
   Scenario: Load single image file
     Given the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Caption   | My Instagram image |
-      | Url       | http://example.com |
+      | Url       | __webserver_url__  |
       | Image     | ifttt_instagram_test_image.jpg |
     And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     When the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
@@ -24,12 +24,12 @@ Feature: Load images triggered by IFTTT
       | post_type      | attachment |
       | post_mime_type | image/jpeg |
       | post_status    | inherit |
-      | metadata       | _ifttt_instagram => {"url":"http://example.com"} |
+      | metadata       | _ifttt_instagram => {"url":"__webserver_url__"} |
 
   Scenario: Load redirect image file
     Given the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Caption   | My Instagram image |
-      | Url       | http://example.com |
+      | Url       | __webserver_url__  |
       | Image     | ifttt_instagram_test_image.php |
     And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the file "ifttt_instagram_test_image.php" is copied to the webserver
@@ -42,4 +42,4 @@ Feature: Load images triggered by IFTTT
       | post_type      | attachment |
       | post_mime_type | image/jpeg |
       | post_status    | inherit |
-      | metadata       | _ifttt_instagram => {"url":"http://example.com"} |
+      | metadata       | _ifttt_instagram => {"url":"__webserver_url__"} |

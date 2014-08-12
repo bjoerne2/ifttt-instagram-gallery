@@ -9,7 +9,7 @@ Feature: Uninstall plugin
     And the option "ifttt_instagram_gallery_options" has the serialized value {"load_css":false}
     And I am logged as an administrator
     When I go to "/wp-admin/plugins.php"
-    And I deactivate the plugin "ifttt-instagram-gallery"
-    And I uninstall the plugin "ifttt-instagram-gallery"
+    And I deactivate the plugin "IFTTT Instagram Gallery"
+    And I uninstall the plugin "IFTTT Instagram Gallery"
     Then I should see the message "The selected plugins have been deleted"
     And the option "ifttt_instagram_gallery_options" should not exist

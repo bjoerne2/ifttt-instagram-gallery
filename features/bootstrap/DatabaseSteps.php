@@ -41,7 +41,7 @@ trait DatabaseSteps {
 	public function set_serialized_content_struct( $option_name, $table ) {
 		$rows_hash  = $table->getRowsHash();
 		$caption    = array_key_exists( 'Caption', $rows_hash ) ? $rows_hash['Caption'] : 'A caption';
-		$url        = array_key_exists( 'Url', $rows_hash ) ? $rows_hash['Url'] : 'http://example.com';
+		$url        = array_key_exists( 'Url', $rows_hash ) ? $rows_hash['Url'] : '__webserver_url__';
 		$source_url = $this->parameters['webserver_url'] . '/' . $rows_hash['Image'];
 		$additional_tags = '';
 		if ( array_key_exists( 'tags', $rows_hash ) ) {
@@ -50,6 +50,7 @@ trait DatabaseSteps {
 			}
 		}
 		$option_value = '{"title":"' . $caption . '","description":"{\"Url\":\"' . $url . '\",\"SourceUrl\":\"' . $source_url . '\"}","post_status":"draft","mt_keywords":["ifttt_wordpress_bridge"' . $additional_tags .']}';
+		$option_value = str_replace( '__webserver_url__', $this->webserver_url, $option_value );
 		$this->set_serialized_option( $option_name, $option_value );
 	}
 
@@ -105,7 +106,6 @@ trait DatabaseSteps {
 		$serialized_option_value   = serialize( $unserialized_option_value );
 		$stmt = $pdo->prepare( 'UPDATE wp_options SET option_value = :option_value WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'sidebars_widgets', ':option_value' => $serialized_option_value ) );
-
 		$widget_options = array( '2' => array(), '_multiwidget' => 1 );
 		if ( $table ) {
 			$widget_options['2'] = $table->getRowsHash();
@@ -211,6 +211,7 @@ trait DatabaseSteps {
 		$result = $this->fetch_all( $stmt );
 		assertEquals( count( $result ), 1, 'The post was not found' );
 		if ( $metadata ) {
+			$metadata = str_replace( '__webserver_url__', $this->webserver_url, $metadata );
 			$post_id = $result[0]['ID'];
 			$metadata_parts = array_map( 'trim', explode( '=>', $metadata ) );
 			$meta_key       = $metadata_parts[0];

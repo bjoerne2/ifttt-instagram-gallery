@@ -142,7 +142,7 @@ class Ifttt_Instagram_Gallery {
 			} elseif ( preg_match( '/^20.$/', $reponse_code ) ) {
 				return $url;
 			} else {
-				throw new Exception( "Unexpected response code: $reponse_code" );
+				throw new Exception( "Unexpected response code for url '$url': $reponse_code" );
 			}
 		}
 	}

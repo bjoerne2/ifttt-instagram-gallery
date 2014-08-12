@@ -160,6 +160,8 @@ trait InstallationSteps {
 				$this->write_to_file( $target_handle, $line );
 				if ( preg_match( "/define\\('WP_DEBUG', \w*\\);/", $line ) ) {
 					$this->write_to_file( $target_handle, "define('WP_DEBUG_LOG', true);\n" );
+					$this->write_to_file( $target_handle, "define('AUTOMATIC_UPDATER_DISABLED', true);\n" );
+					$this->write_to_file( $target_handle, "define('WP_HTTP_BLOCK_EXTERNAL', true);\n" );
 				}
 			} 
 		} finally {

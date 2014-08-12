@@ -20,29 +20,40 @@ trait ManualWordPressSteps {
 	/**
 	 * @Given /^I activate the plugin "([^"]*)"$/
 	 */
-	public function activate_plugin_manually( $plugin_id ) {
-		$page = $this->get_page();
-		$plugin_area = $page->find( 'css', "#$plugin_id" );
-		$plugin_area->find( 'xpath', "//a[contains(@href, 'action=activate')]" )->click();
+	public function activate_plugin_manually( $plugin_name ) {
+		$link = $this->get_plugin_area( $plugin_name )->find( 'xpath', "//a[contains(@href, 'action=activate')]" );
+		assertNotNull( $link, 'Link not found' );
+		$link->click();
 	}
 
 	/**
 	 * @Given /^I deactivate the plugin "([^"]*)"$/
 	 */
-	public function deactivate_plugin_manually( $plugin_id ) {
-		$page = $this->get_page();
-		$plugin_area = $page->find( 'css', "#$plugin_id" );
-		$plugin_area->find( 'xpath', "//a[contains(@href, 'action=deactivate')]" )->click();
+	public function deactivate_plugin_manually( $plugin_name ) {
+		$link = $this->get_plugin_area( $plugin_name )->find( 'xpath', "//a[contains(@href, 'action=deactivate')]" );
+		assertNotNull( $link, 'Link not found' );
+		$link->click();
+		assertNotNull( $this->get_page()->find( 'css', '.updated' ), "Can't find element" );
 	}
 
 	/**
 	 * @Given /^I uninstall the plugin "([^"]*)"$/
 	 */
-	public function uninstall_plugin_manually( $plugin_id ) {
-		$plugin_area = $this->get_page()->find( 'css', "#$plugin_id" );
-		$plugin_area->find( 'xpath', "//a[contains(@href, 'action=delete-selected')]" )->click();
-		$form = $this->get_page()->find( 'xpath', "//form[contains(@action, 'action=delete-selected')]" );
-		$form->find( 'css', '#submit' )->press();
+	public function uninstall_plugin_manually( $plugin_name ) {
+		$link = $this->get_plugin_area( $plugin_name )->find( 'xpath', "//a[contains(@href, 'action=delete-selected')]" );
+		assertNotNull( $link, 'Link not found' );
+		$link->click();
+		$form   = $this->get_page()->find( 'xpath', "//form[contains(@action, 'action=delete-selected')]" );
+		$submit = $form->find( 'css', '#submit' );
+		assertNotNull( $submit );
+		$submit->press();
+		assertNotNull( $this->get_page()->find( 'css', '.updated' ), "Can't find element" );
+	}
+
+	private function get_plugin_area( $plugin_name ) {
+		$plugin_area = $this->get_page()->find( 'xpath', "//tr[td/strong/text() = '$plugin_name']" );
+		assertNotNull( $plugin_area, 'Plugin area not found' );
+		return $plugin_area;
 	}
 
 	/**

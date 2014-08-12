@@ -10,12 +10,12 @@ Feature: Display instragram images via shortcode
     And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Caption   | An Instagram image |
-      | Url       | http://example.com |
+      | Url       | __webserver_url__  |
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
     And the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
       | Caption   | Another Instagram image |
-      | Url       | http://example.com |
+      | Url       | __webserver_url__  |
       | Image     | ifttt_instagram_test_image.jpg |
     And the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
     And the hello world post has the content "[ifttt_instagram_gallery]"

@@ -33,7 +33,7 @@ The difference to standard IFTTT WordPress channels is that your Instagram photo
 
 [IFTTT](http://www.ifttt.com/), which stands for "If This Then That", is a service that enables users to connect web applications like Instagram and WordPress together through simple conditional statements known as "Recipes". The recipe of this Instagram-WordPress plugin looks like this:
 
-*"If I create a new Instragram photo, then trigger the IFTTT WordPress Bridge of my blog to create the photo in my IFTTT Instagram Gallery"*
+*"If I create a new Instagram photo, then trigger the IFTTT WordPress Bridge of my blog to create the photo in my IFTTT Instagram Gallery"*
  
 *What do I have to do in order to use this plugin?*
 

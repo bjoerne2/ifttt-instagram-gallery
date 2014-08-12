@@ -15,6 +15,6 @@ Feature: Install and activate plugin
     And the plugin "ifttt-instagram-gallery" is installed (from src)
     And I am logged as an administrator
     When I go to "/wp-admin/plugins.php"
-    And I activate the plugin "ifttt-instagram-gallery"
+    And I activate the plugin "IFTTT Instagram Gallery"
     Then I should see the message "Plugin activated"
     And the plugin "ifttt-instagram-gallery" is activated

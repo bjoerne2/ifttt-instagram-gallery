@@ -29,6 +29,7 @@ class FeatureContext extends MinkContext {
 		$this->parameters    = $parameters;
 		$this->install_dir   = $this->path( dirname( dirname( dirname( __FILE__ ) ) ), 'install' );
 		$this->webserver_dir = $this->parameters['webserver_dir'];
+		$this->webserver_url = $this->parameters['webserver_url'];
 		$this->database_file = $this->parameters['database_file'];
 		$this->create_wp_config_replacements();
 	}

@@ -38,7 +38,7 @@ The difference to standard IFTTT WordPress channels is that your Instagram photo
  
 *What do I have to do in order to use this plugin?*
 
-1. Install and activate the plugin **IFTTT WordPress Bridge**
+1. Install and activate the plugin [IFTTT WordPress Bridge](https://wordpress.org/plugins/ifttt-bridge/)
 2. Register with [www.ifttt.com](http://www.ifttt.com/)
 3. Install the IFTTT Instagram Gallery (installation instructions can be found under the "Installations" tab)
 4. Create a IFTTT recipe. You can use the shared recipe [https://ifttt.com/recipes/195858-if-i-create-a-instagram-photo-then-create-the-photo-in-my-ifttt-instagram-gallery-via-ifttt-bridge](https://ifttt.com/recipes/195858-if-i-create-a-instagram-photo-then-create-the-photo-in-my-ifttt-instagram-gallery-via-ifttt-bridge) 

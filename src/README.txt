@@ -39,8 +39,32 @@ The difference to standard IFTTT WordPress channels is that your Instagram photo
 *What do I have to do in order to use this plugin?*
 
 1. Install and activate the plugin **IFTTT WordPress Bridge**
-1. Register with [www.ifttt.com](http://www.ifttt.com/)
-1. Install the IFTTT Instagram Gallery (installation instructions can be found under the "Installations" tab)
+2. Register with [www.ifttt.com](http://www.ifttt.com/)
+3. Install the IFTTT Instagram Gallery (installation instructions can be found under the "Installations" tab)
+4. Create a IFTTT recipe. You can use the shared recipe [https://ifttt.com/recipes/195858-if-i-create-a-instagram-photo-then-create-the-photo-in-my-ifttt-instagram-gallery-via-ifttt-bridge](https://ifttt.com/recipes/195858-if-i-create-a-instagram-photo-then-create-the-photo-in-my-ifttt-instagram-gallery-via-ifttt-bridge) 
+5. Display the gallery as widget, via shortcode or via PHP function
+
+*Shortcode*
+
+    [ifttt_instagram_gallery]
+
+See Options below. If you want to learn more about short codes check out the official documentation: [http://codex.wordpress.org/Shortcode](http://codex.wordpress.org/Shortcode)
+
+*PHP function*
+
+    ifttt_instagram_gallery()
+
+See Options below. You can use the PHP function in your customized theme.
+
+*Options for Shortcode or PHP function*
+
+The options are consistent with the widget options:
+
+* wrapper_width
+* images_per\_row
+* image_size (thumbnail|medium|large|full)
+* num_of_images
+* random (true|false)
 
 If you need help, don’t hesitate to contact me! 
 
@@ -73,3 +97,11 @@ e.g.
 2. Extract the `ifttt-instagram-gallery` directory to your computer
 3. Upload the `ifttt-instagram-gallery` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
+
+== Screenshots ==
+
+1. Use the shared recipe on IFTTT to use this plugin
+2. Or you create your own recipe
+3. Configure and use the gallery widget
+4. Plugin in action (Screenshot of [http://travel.bjoerne.com/](http://travel.bjoerne.com/))
+5. Plugin options

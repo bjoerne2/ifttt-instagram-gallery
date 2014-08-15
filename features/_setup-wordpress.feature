@@ -7,6 +7,17 @@ Feature: Setup fresh WordPress
   Scenario: Get fresh WordPress
     Given a fresh WordPress is installed
 
+  Scenario: Get WordPress with activated plugin
+    Given a fresh WordPress is installed
+    And the plugin "ifttt-instagram-gallery" is installed (from src)
+    And the plugin "ifttt-instagram-gallery" is activated
+
+  Scenario: Get German WordPress with activated plugin
+    Given the blog language is "de_DE"
+    And a fresh WordPress is installed
+    And the plugin "ifttt-instagram-gallery" is installed (from src)
+    And the plugin "ifttt-instagram-gallery" is activated
+
   Scenario: Get WordPress with activated IFTTT Instagram Gallery plugin and widget, EM Object Cache plugin
     Given a fresh WordPress is installed
     And the plugin "ifttt-instagram-gallery" is installed and activated (from src)

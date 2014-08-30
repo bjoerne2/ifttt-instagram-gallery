@@ -110,3 +110,7 @@ e.g.
 
 = 1.0.1 =
 * Compatibility to PHP 5.3
+
+= 1.0.2 =
+* Bugfix regarding compatibility to PHP 5.3
+* Bugfix regarding customized widget title

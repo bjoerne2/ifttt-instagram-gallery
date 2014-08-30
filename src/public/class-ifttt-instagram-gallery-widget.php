@@ -39,7 +39,7 @@ class Ifttt_Instagram_Gallery_Widget extends WP_Widget {
 		if ( array_key_exists( $widget_id, $cache ) ) {
 			return print $cache[ $widget_id ];
 		}
-		$title  = _x( 'Instagram', 'Widget title', $this->widget_slug );
+		$title  = @$instance['title'] ? @$instance['title'] : _x( 'Instagram', 'Widget title', $this->widget_slug );
 		$title  = apply_filters( 'widget_title', $title );
 		$images = Ifttt_Instagram_Gallery::get_instance()->get_images( $instance );
 		extract( $args, EXTR_SKIP );
@@ -63,7 +63,7 @@ class Ifttt_Instagram_Gallery_Widget extends WP_Widget {
 	 */
 	public function form( $instance ) {
 		Ifttt_Instagram_Gallery::get_instance()->merge_default_display_options( $instance );
-		$instance['title'] = @$instance['title'] ?: '';
+		$instance['title'] = @$instance['title'] ? @$instance['title'] : '';
 		extract( $instance, EXTR_SKIP );
 		$sizes = array();
 		$sizes[] = array(

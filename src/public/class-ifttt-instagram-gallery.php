@@ -28,7 +28,7 @@ class Ifttt_Instagram_Gallery {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -309,8 +309,9 @@ class Ifttt_Instagram_Gallery {
 				}
 			}
 			$custom_values = get_post_custom_values( '_ifttt_instagram', $post->ID );
+			$custom_value  = unserialize( $custom_values[0] );
 			$images[] = array(
-				'instagram_url' => unserialize( $custom_values[0] )['url'],
+				'instagram_url' => $custom_value['url'],
 				'image_url' => $image_url,
 				'title' => $post->post_content,
 			);

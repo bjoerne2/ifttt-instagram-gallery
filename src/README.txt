@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
-IFTTT Instagram Gallery is a highly configurable plugin that automatically shares your latest Instagram pictures in an amazing looking photo grid on your WordPress blog.
+IFTTT Instagram Gallery is a highly configurable plugin that automatically shares your Instagram pictures in an amazing looking photo grid.
 
 == Description ==
 
@@ -32,13 +32,13 @@ The difference to standard IFTTT WordPress channels is that your Instagram photo
 
 *What is IFTTT?*
 
-[IFTTT](http://www.ifttt.com/), which stands for "If This Then That", is a service that enables users to connect web applications like Instagram and WordPress together through simple conditional statements known as "Recipes". The recipe of this Instagram-WordPress plugin looks like this:
+[IFTTT](http://www.ifttt.com/), which stands for "If This Then That", is a service that enables users to connect web applications like Instagram and WordPress together through simple conditional statements known as "Recipes". There is a public recipe to be used in combination with this plugin:
 
-*"If I create a new Instagram photo, then trigger the IFTTT WordPress Bridge of my blog to create the photo in my IFTTT Instagram Gallery"*
+[If I create a Instagram photo then create the photo in my IFTTT Instagram Gallery via IFTTT Bridge](https://ifttt.com/recipes/195858-if-i-create-a-instagram-photo-then-create-the-photo-in-my-ifttt-instagram-gallery-via-ifttt-bridge](https://ifttt.com/recipes/195858-if-i-create-a-instagram-photo-then-create-the-photo-in-my-ifttt-instagram-gallery-via-ifttt-bridge)
  
 *What do I have to do in order to use this plugin?*
 
-1. Install and activate the plugin [IFTTT WordPress Bridge](https://wordpress.org/plugins/ifttt-bridge/)
+1. Install and activate the plugin [IFTTT Bridge for WordPress](https://wordpress.org/plugins/ifttt-bridge/)
 2. Register with [www.ifttt.com](http://www.ifttt.com/)
 3. Install the IFTTT Instagram Gallery (installation instructions can be found under the "Installations" tab)
 4. Create a IFTTT recipe. You can use the shared recipe [https://ifttt.com/recipes/195858-if-i-create-a-instagram-photo-then-create-the-photo-in-my-ifttt-instagram-gallery-via-ifttt-bridge](https://ifttt.com/recipes/195858-if-i-create-a-instagram-photo-then-create-the-photo-in-my-ifttt-instagram-gallery-via-ifttt-bridge) 
@@ -66,7 +66,7 @@ The options are consistent with the widget options:
 * num_of_images
 * random (true|false)
 
-If you need help, don’t hesitate to contact me! 
+If you need help, don’t hesitate to contact me! In addition this [German blog article](http://www.bjoerne.com/instagram-bilder-mit-ifttt-den-eigenen-wordpress-blog-einbinden/) may help you.
 
 If you like this plugin, please rate it.
 
@@ -105,3 +105,8 @@ e.g.
 3. Configure and use the gallery widget
 4. Plugin in action (Screenshot of [http://travel.bjoerne.com/](http://travel.bjoerne.com/))
 5. Plugin options
+
+== Changelog ==
+
+= 1.0.1 =
+* Compatibility to PHP 5.3

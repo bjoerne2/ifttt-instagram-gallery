@@ -1,5 +1,5 @@
-Feature: Display instragram images via shortcode
-  In order to see instragram images anywhere in a post
+Feature: Display instagram images via shortcode
+  In order to see instagram images anywhere in a post
   As a developer
   I need to be able to use a shortcode
   

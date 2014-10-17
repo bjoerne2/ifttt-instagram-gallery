@@ -82,7 +82,7 @@ trait DatabaseSteps {
 	/**
 	 * @Given /^the hello world post has the content "([^"]*)"$/
 	 */
-	public function set_hello_word_content( $content ) {
+	public function set_hello_world_content( $content ) {
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT ID FROM wp_posts WHERE post_type = :post_type ORDER BY ID' );
 		$stmt->execute( array( ':post_type' => 'post' ) );

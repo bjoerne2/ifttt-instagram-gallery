@@ -1,5 +1,5 @@
-Feature: Display instragram images in widget
-  In order to see instragram images in a widget
+Feature: Display instagram images in widget
+  In order to see instagram images in a widget
   As a administrator
   I need to be able to activate, configure and display the widget
   

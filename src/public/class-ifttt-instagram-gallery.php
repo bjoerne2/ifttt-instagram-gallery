@@ -113,7 +113,7 @@ class Ifttt_Instagram_Gallery {
 	 */
 	public function load_instagram_image( $content_struct ) {
 		// Ingredients: Caption, Url, SourceUrl, CreatedAt, EmbedCode
-		$title          = $content_struct['title'];
+		$title          = htmlspecialchars( $content_struct['title'] );
 		$description    = $content_struct['description'];
 		$description_decoded = json_decode( $description, true ); 
 		$instagram_url  = $this->get_final_url( $description_decoded['Url'] );

@@ -3,18 +3,17 @@ default:
     features: features
   context:
     parameters:
-      webserver_dir: /Users/bjoerne/Development/WebserverDocuments/wordpress-behat
-      webserver_url: http://localhost/wordpress-behat/
+      webserver_dir: <your_webserver_dir>
+      webserver_url: <your_webserver_url>
       install_files:
-        wordpress: wordpress-3.9.1-de_DE.zip
-        sqlite_integration: sqlite-integration.1.6.3.zip
-        disable_google_fonts: disable-google-fonts.1.0.zip
-        em_object_cache: em-object-cache.zip
-      database_file: database_no_gravatar.sqlite
-      selenium_implicit_timeout: 1000
+        wordpress: <your_wordpress e.g. wordpress-4.0-de_DE.zip>
+        sqlite_integration: <your_sqlite_integration e.g. sqlite-integration.1.6.3.zip>
+        disable_google_fonts: <your_disable_google_fonts e.g. disable-google-fonts.1.0.zip>
+      database_file: <your_database_file>
+      selenium_implicit_timeout: 5000
   extensions:
     Behat\MinkExtension\Extension:
-      base_url: 'http://localhost/wordpress-behat/'
+      base_url: <your_base_url, same as webserver_url above>
       default_session: selenium2
       browser_name: 'firefox'
       selenium2:

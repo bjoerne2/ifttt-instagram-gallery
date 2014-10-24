@@ -114,3 +114,6 @@ e.g.
 = 1.0.2 =
 * Bugfix regarding compatibility to PHP 5.3
 * Bugfix regarding customized widget title
+
+= 1.0.3 =
+* Bugfix: Special characters led to broken title attributes of Instagram images and invalid html. Title attributes of images are now escaped with htmlspecialchars().

@@ -3,7 +3,7 @@ Contributors: bjoerne
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XS98Y5ASSH5S4
 Tags: ifttt, ifthisthenthat, instagram, gallery
 Requires at least: 3.9
-Tested up to: 3.9.2
+Tested up to: 4.1
 Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt

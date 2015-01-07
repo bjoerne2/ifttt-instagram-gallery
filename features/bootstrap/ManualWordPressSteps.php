@@ -286,9 +286,13 @@ trait ManualWordPressSteps {
 	private function login( $username, $password ) {
 		$this->visit( 'wp-login.php' );
 		$page = $this->get_page();
-		$page->fillField( 'user_login', $username );
-		$page->fillField( 'user_pass', $password );
-		$page->findButton( 'wp-submit' )->click();
+		for ( $i = 0; $i < 5; $i++ ) { 
+			$page->fillField( 'user_login', $username );
+			$page->fillField( 'user_pass', $password );
+			if ( $this->getSession()->evaluateScript( "(function () { if (document.getElementById('user_pass').value == '') { return false; } else { document.getElementById('wp-submit').click(); return true; } })();" ) ) {
+				break;
+			}
+		}
 		assertTrue( $page->hasContent( 'Dashboard' ) );
 	}
 

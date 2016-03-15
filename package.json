@@ -1,6 +1,6 @@
 {
   "name": "ifttt-instagram-gallery",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "IFTTT Instagram Gallery is a highly configurable widget that automatically shares your latest Instagram pictures in an amazing looking photo grid on your WordPress blog.",
   "main": "index.js",
   "scripts": {

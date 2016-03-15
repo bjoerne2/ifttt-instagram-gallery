@@ -28,7 +28,7 @@ class Ifttt_Instagram_Gallery {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.3';
+	const VERSION = '1.0.4';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -115,7 +115,7 @@ class Ifttt_Instagram_Gallery {
 		// Ingredients: Caption, Url, SourceUrl, CreatedAt, EmbedCode
 		$title          = htmlspecialchars( $content_struct['title'] );
 		$description    = $content_struct['description'];
-		$description_decoded = json_decode( $description, true ); 
+		$description_decoded = json_decode( $description, true );
 		$instagram_url  = $this->get_final_url( $description_decoded['Url'] );
 		$image_url      = $this->get_final_url( $description_decoded['SourceUrl'] );
 		$filename       = $this->get_filename( $image_url );
@@ -132,6 +132,7 @@ class Ifttt_Instagram_Gallery {
 	 */
 	private function get_final_url( $url ) {
 		for ( $i = 0; $i < 5; $i++ ) {
+			$url = $this->get_url_without_query( $url );
 			$response = wp_remote_head( $url, array( 'redirection' => 0 ) );
 			$reponse_code = wp_remote_retrieve_response_code( $response );
 			if ( preg_match( '/^30.$/', $reponse_code ) ) {
@@ -145,6 +146,16 @@ class Ifttt_Instagram_Gallery {
 				throw new Exception( "Unexpected response code for url '$url': $reponse_code" );
 			}
 		}
+	}
+
+	/**
+	 * Returns the URL without query part.
+	 *
+	 * @since   1.0.2
+	 */
+	private function get_url_without_query( $url ) {
+		$url_parts = parse_url( $url );
+		return $url_parts['scheme'] . '://' . $url_parts['host'] . $url_parts['path'];
 	}
 
 	/**

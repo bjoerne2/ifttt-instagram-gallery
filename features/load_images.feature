@@ -43,3 +43,21 @@ Feature: Load images triggered by IFTTT
       | post_mime_type | image/jpeg |
       | post_status    | inherit |
       | metadata       | _ifttt_instagram => {"url":"__webserver_url__"} |
+
+  Scenario: Load image file with query
+    Given the option "ifttt_instagram_gallery_testplugin_content_struct" has the serialized content struct
+      | Caption   | My Instagram image |
+      | Url       | __webserver_url__?cache_id=xyz  |
+      | Image     | ifttt_instagram_test_image.jpg?cache_id=xyz |
+    And the file "ifttt_instagram_test_image.jpg" is copied to the webserver
+    When the admin post action "ifttt_instagram_gallery_testplugin_load_images" is invoked
+    Then the file "ifttt_instagram_test_image.jpg" exists in the upload folder
+    And a post exists with
+      | post_content   | My Instagram image |
+      | post_title     | ifttt_instagram_test_image.jpg |
+      | post_name      | ifttt_instagram_test_image-jpg |
+      | post_type      | attachment |
+      | post_mime_type | image/jpeg |
+      | post_status    | inherit |
+      | metadata       | _ifttt_instagram => {"url":"__webserver_url__"} |
+

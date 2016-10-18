@@ -19,7 +19,6 @@ trait AdminPostSteps {
 	 * @Given /^the admin post action "([^"]*)" is invoked$/
 	 */
 	public function invoke_admin_post_action( $name ) {
-		error_log('invoke_admin_post_action');
 		$curl_handle = curl_init();
 		curl_setopt_array(
 			$curl_handle, array(

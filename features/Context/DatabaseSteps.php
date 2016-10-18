@@ -1,5 +1,11 @@
 <?php
 
+namespace Context;
+
+use PDO;
+use PHPUnit_Framework_Assert;
+use Exception;
+
 trait DatabaseSteps {
 
 	/**
@@ -8,8 +14,8 @@ trait DatabaseSteps {
 	public function activate_plugin( $plugin_id ) {
 		if ( file_exists( $this->path( $this->webserver_dir, 'wp-content', 'plugins', $plugin_file = "$plugin_id.php" ) ) ) {
 		} elseif ( file_exists( $this->path( $this->webserver_dir, 'wp-content', 'plugins', $plugin_file = "$plugin_id/$plugin_id.php" ) ) ) {
-		} else {
-			throw new Exception( "Plugin file '$plugin_id' not found" );			
+		// } else {
+		// 	throw new Exception( "Plugin file '$plugin_id' not found" );			
 		}
 		$pdo  = $this->create_pdo();
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
@@ -100,7 +106,7 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'sidebars_widgets' ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, "Option 'sidebars_widgets' doesn't exists" );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 1, "Option 'sidebars_widgets' doesn't exists" );
 		$unserialized_option_value = unserialize( $result[0]['option_value'] );
 		$unserialized_option_value['sidebar-1'][] = "$widget_id-2";
 		$serialized_option_value   = serialize( $unserialized_option_value );
@@ -122,7 +128,7 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'widget_ifttt-instagram-gallery' ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, "Option 'widget_ifttt-instagram-gallery' doesn't exists" );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 1, "Option 'widget_ifttt-instagram-gallery' doesn't exists" );
 		$unserialized   = unserialize( $result[0]['option_value'] );
 		$widget_options = $unserialized['2'];
 		foreach ( $rows_hash as $expected_key => $expected_value ) {
@@ -148,7 +154,7 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => $option_name ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, "Option '$option_name' doesn't exists" );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 1, "Option '$option_name' doesn't exists" );
 		$unserialized = unserialize( $result[0]['option_value'] );
 		foreach ( $expected_option_values as $expected_option_k => $expected_option_v ) {
 			foreach ( $unserialized as $option_k => $option_v ) {
@@ -177,8 +183,8 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => $option_name ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, "Option '$option_name' doesn't exists" );
-		assertEquals( $option_value, $result[0]['option_value'], "Option '$option_name' should have value '$option_value' but has value '".$result[0]['option_value']."'" );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 1, "Option '$option_name' doesn't exists" );
+		PHPUnit_Framework_Assert::assertEquals( $option_value, $result[0]['option_value'], "Option '$option_name' should have value '$option_value' but has value '".$result[0]['option_value']."'" );
 	}
 
 	/**
@@ -189,7 +195,7 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => $option_name ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 0, "The option '$option_name' was found but should not exist" );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 0, "The option '$option_name' was found but should not exist" );
 	}
 
 	/**
@@ -209,7 +215,7 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_posts WHERE ' . implode( ' AND ', $where ) );
 		$stmt->execute( $rows_hash );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, 'The post was not found' );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 1, 'The post was not found' );
 		if ( $metadata ) {
 			$metadata = str_replace( '__webserver_url__', $this->webserver_url, $metadata );
 			$post_id = $result[0]['ID'];
@@ -219,8 +225,8 @@ trait DatabaseSteps {
 			$stmt           = $pdo->prepare( 'SELECT * FROM wp_postmeta WHERE post_id = :post_id AND meta_key = :meta_key' );
 			$stmt->execute( array( 'post_id' => $post_id, 'meta_key' => $meta_key ) );
 			$result = $this->fetch_all( $stmt );
-			assertEquals( count( $result ), 1, "Metadata with key '$meta_key' was not found" );
-			assertEquals( $meta_value, $result[0]['meta_value'] );
+			PHPUnit_Framework_Assert::assertEquals( count( $result ), 1, "Metadata with key '$meta_key' was not found" );
+			PHPUnit_Framework_Assert::assertEquals( $meta_value, $result[0]['meta_value'] );
 		}
 	}
 
@@ -232,7 +238,7 @@ trait DatabaseSteps {
 		$stmt = $pdo->prepare( 'SELECT * FROM wp_options WHERE option_name = :option_name' );
 		$stmt->execute( array( ':option_name' => 'sidebars_widgets' ) );
 		$result = $this->fetch_all( $stmt );
-		assertEquals( count( $result ), 1, "Option 'sidebars_widgets' doesn't exists" );
+		PHPUnit_Framework_Assert::assertEquals( count( $result ), 1, "Option 'sidebars_widgets' doesn't exists" );
 		$unserialized_option_value = unserialize( $result[0]['option_value'] );
 		$active_widgets = $unserialized_option_value['sidebar-1'];
 		foreach ( $active_widgets as $active_widget ) {
@@ -247,7 +253,7 @@ trait DatabaseSteps {
 	 * @Given /^the file "([^"]*)" exists in the upload folder$/
 	 */
 	public function assert_image_exists_in_upload_folder( $image ) {
-		assertTrue( file_exists( $this->path( $this->webserver_dir, 'wp-content', 'uploads', $image ) ), "Image '$image' not found in upload folder" );
+		PHPUnit_Framework_Assert::assertTrue( file_exists( $this->path( $this->webserver_dir, 'wp-content', 'uploads', $image ) ), "Image '$image' not found in upload folder" );
 	}
 
 	private function create_pdo() {

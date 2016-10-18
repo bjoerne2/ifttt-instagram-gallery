@@ -1,26 +1,37 @@
 default:
-  paths:
-    features: features
-  context:
-    parameters:
-      webserver_dir: <your_webserver_dir>
-      webserver_url: <your_webserver_url>
-      install_files:
-        wordpress: <your_wordpress e.g. wordpress-4.0-de_DE.zip>
-        sqlite_integration: <your_sqlite_integration e.g. sqlite-integration.1.6.3.zip>
-        disable_google_fonts: <your_disable_google_fonts e.g. disable-google-fonts.1.0.zip>
-      database_file: <your_database_file>
-      selenium_implicit_timeout: 5000
+  autoload:
+    - %paths.base%/features
   extensions:
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       base_url: <your_base_url, same as webserver_url above>
       default_session: selenium2
       browser_name: 'firefox'
       selenium2:
-        capabilities: { "browser": "firefox", "version": "26"}
-  formatter:
-    name:                     pretty
-    parameters:
+        capabilities:
+          browser: 'firefox'
+          version: <firefox_version>
+          firefox:
+            binary: <path_to_firefox>
+  suites:
+    default:
+      paths:
+        - %paths.base%/features
+      contexts:
+        - Context\FeatureContext:
+          - parameters:
+            webserver_dir: <your_webserver_dir>
+            webserver_url: <your_webserver_url>
+            install_files:
+              wordpress: <your_wordpress e.g. wordpress-4.6.1-de_DE.zip>
+              sqlite_integration: <your_sqlite_integration e.g. sqlite-integration.1.6.3.zip>
+              em_object_cache: <your_em_object_cache e.g. em-object-cache.zip>
+              disable_google_fonts: <your_disable_google_fonts e.g. disable-google-fonts.1.0.zip>
+            database_file: <your_database_file>
+            selenium_implicit_timeout: 5000
+      filters:
+          tags: "~@devonly"
+  formatters:
+    pretty:
       decorated:              false
       verbose:                false
       time:                   true
@@ -28,5 +39,8 @@ default:
       output_path:            null
       multiline_arguments:    true
       paths:                  false
-  filters:
-    tags:                 ~@devonly
+devonly:
+  suites:
+    default:
+      filters:
+        tags: "@devonly"

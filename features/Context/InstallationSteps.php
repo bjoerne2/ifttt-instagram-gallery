@@ -1,5 +1,10 @@
 <?php
 
+namespace Context;
+
+use Exception;
+use ZipArchive;
+
 trait InstallationSteps {
 
 	private function create_wp_config_replacements() {
@@ -32,7 +37,7 @@ trait InstallationSteps {
 		$this->prepare_sqlite_integration_in_webserver();
 		$this->prepare_sqlite_database();
 		$this->install_plugin( 'disable-google-fonts' );
-		$this->activate_plugin( 'disable-google-fonts' );   
+		$this->activate_plugin( 'disable-google-fonts' );
 		$this->create_wp_config_file();
 	}
 
@@ -123,6 +128,9 @@ trait InstallationSteps {
 			$this->delete_file_or_dir( $this->webserver_dir );
 		}
 		$this->move_file_or_dir( $this->path( $this->temp_dir, 'wordpress' ), $this->webserver_dir );
+		if ( file_exists( $this->path( $this->install_dir, '.htaccess' ) ) ) {
+			$this->copy_file_or_dir( $this->path( $this->install_dir, '.htaccess' ), $this->path( $this->webserver_dir, '.htaccess' ) );
+		}
 	}
 
 	private function prepare_sqlite_integration_in_webserver() {
@@ -159,7 +167,7 @@ trait InstallationSteps {
 				}
 				$this->write_to_file( $target_handle, $line );
 				if ( preg_match( "/define\\('WP_DEBUG', \w*\\);/", $line ) ) {
-					$this->write_to_file( $target_handle, "define('WP_DEBUG_LOG', true);\n" );
+					// $this->write_to_file( $target_handle, "define('WP_DEBUG_LOG', true);\n" );
 					$this->write_to_file( $target_handle, "define('AUTOMATIC_UPDATER_DISABLED', true);\n" );
 					$this->write_to_file( $target_handle, "define('WP_HTTP_BLOCK_EXTERNAL', true);\n" );
 				}
@@ -168,6 +176,7 @@ trait InstallationSteps {
 			fclose( $source_handle );
 			fclose( $target_handle );
 		}
+		// file_put_contents( $this->path( $this->webserver_dir, '.htaccess' ), "php_value opcache.enable \"0\"\n" );
 	}
 
 	private function replace_config_value( $line ) {
@@ -243,8 +252,6 @@ trait InstallationSteps {
 			} catch (Exception $e) {
 				if ( 4 == $i ) {
 					throw $e;
-				} else {
-					sleep( 1 );
 				}
 			}
 		}

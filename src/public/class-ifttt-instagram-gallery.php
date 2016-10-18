@@ -28,7 +28,7 @@ class Ifttt_Instagram_Gallery {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '1.0.4';
+	const VERSION = '1.0.5';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -140,12 +140,11 @@ class Ifttt_Instagram_Gallery {
 				if ( ! $url ) {
 					throw new Exception( 'No redirect url found in Location header' );
 				}
-			} elseif ( preg_match( '/^20.$/', $reponse_code ) ) {
-				return $url;
 			} else {
-				throw new Exception( "Unexpected response code for url '$url': $reponse_code" );
+				break;
 			}
 		}
+		return $url;
 	}
 
 	/**

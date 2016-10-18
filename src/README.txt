@@ -3,7 +3,7 @@ Contributors: bjoerne
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XS98Y5ASSH5S4
 Tags: ifttt, ifthisthenthat, instagram, gallery
 Requires at least: 3.9
-Tested up to: 4.4.2
+Tested up to: 4.6.1
 Stable tag: trunk
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
@@ -120,3 +120,6 @@ e.g.
 
 = 1.0.4 =
 * Bugfix after changed instagram URLs. Crop query part, e.g. invoke https://scontent-frt3-1.cdninstagram.com/t51.2885-15/e35/1208218_821804957925622_1457586436_n.jpg instead of https://scontent-frt3-1.cdninstagram.com/t51.2885-15/e35/1208218_821804957925622_1457586436_n.jpg?ig_cache_key=MTIwNDU4NDU1NzU3MjMxODAxNg%3D%3D.2
+
+= 1.0.5 =
+* Enhancement in get_final_url() method: Don't fail if response code isn't 2xx, just use the last known URL. Avoids problems when Instagram returns a code 400 because of spammy behaviour.

@@ -9,8 +9,8 @@ Version: 0.0.0
 */
 
 function ifttt_instagram_gallery_testplugin_load_images() {
-	$content_struct = get_option( 'ifttt_instagram_gallery_testplugin_content_struct' );
-	do_action( 'ifttt_bridge', $content_struct );
+  $content_struct = get_option( 'ifttt_instagram_gallery_testplugin_content_struct' );
+  do_action( 'ifttt_bridge', $content_struct );
 }
 
 add_action( 'admin_post_nopriv_ifttt_instagram_gallery_testplugin_load_images', 'ifttt_instagram_gallery_testplugin_load_images' );

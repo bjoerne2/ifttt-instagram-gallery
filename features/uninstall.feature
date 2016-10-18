@@ -11,5 +11,5 @@ Feature: Uninstall plugin
     When I go to "/wp-admin/plugins.php"
     And I deactivate the plugin "IFTTT Instagram Gallery"
     And I uninstall the plugin "IFTTT Instagram Gallery"
-    Then I should see the message "The selected plugins have been deleted"
+    Then I should see the message "IFTTT Instagram Gallery was successfully deleted."
     And the option "ifttt_instagram_gallery_options" should not exist

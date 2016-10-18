@@ -26,7 +26,7 @@ Feature: Display instagram images via shortcode
     And I should see images with
       | number of images | 2 |
     And I should see image files
-      | ifttt_instagram_test_image1-150x150.jpg |
+      | ifttt_instagram_test_image-1-150x150.jpg |
       | ifttt_instagram_test_image-150x150.jpg |
 
   Scenario Outline: See maximum images per row
@@ -123,15 +123,15 @@ Feature: Display instagram images via shortcode
     And I should see images with
       | number of images | 10 |
     And I should not see image files
-      | ifttt_instagram_test_image9-150x150.jpg |
-      | ifttt_instagram_test_image8-150x150.jpg |
-      | ifttt_instagram_test_image7-150x150.jpg |
-      | ifttt_instagram_test_image6-150x150.jpg |
-      | ifttt_instagram_test_image5-150x150.jpg |
-      | ifttt_instagram_test_image4-150x150.jpg |
-      | ifttt_instagram_test_image3-150x150.jpg |
-      | ifttt_instagram_test_image2-150x150.jpg |
-      | ifttt_instagram_test_image1-150x150.jpg |
+      | ifttt_instagram_test_image-9-150x150.jpg |
+      | ifttt_instagram_test_image-8-150x150.jpg |
+      | ifttt_instagram_test_image-7-150x150.jpg |
+      | ifttt_instagram_test_image-6-150x150.jpg |
+      | ifttt_instagram_test_image-5-150x150.jpg |
+      | ifttt_instagram_test_image-4-150x150.jpg |
+      | ifttt_instagram_test_image-3-150x150.jpg |
+      | ifttt_instagram_test_image-2-150x150.jpg |
+      | ifttt_instagram_test_image-1-150x150.jpg |
       | ifttt_instagram_test_image-150x150.jpg |
 
   Scenario: See 10 random file of 20

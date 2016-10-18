@@ -1,5 +1,9 @@
 <?php
 
+namespace Context;
+
+use PHPUnit_Framework_Assert;
+
 trait AdminPostSteps {
 
 	/**
@@ -15,6 +19,7 @@ trait AdminPostSteps {
 	 * @Given /^the admin post action "([^"]*)" is invoked$/
 	 */
 	public function invoke_admin_post_action( $name ) {
+		error_log('invoke_admin_post_action');
 		$curl_handle = curl_init();
 		curl_setopt_array(
 			$curl_handle, array(
@@ -26,6 +31,6 @@ trait AdminPostSteps {
 		curl_exec( $curl_handle );
 		$response_info = curl_getinfo( $curl_handle );
 		curl_close( $curl_handle );
-		assertEquals( 200, $response_info['http_code'] );
+		PHPUnit_Framework_Assert::assertEquals( 200, $response_info['http_code'] );
 	}
 }

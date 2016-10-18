@@ -1,10 +1,11 @@
 <?php
 
+namespace Context;
+
 use Behat\Behat\Exception\PendingException;
 use Behat\MinkExtension\Context\MinkContext;
+use PHPUnit_Framework_Assert;
 
-require_once 'PHPUnit/Autoload.php';
-require_once 'PHPUnit/Framework/Assert/Functions.php';
 require_once 'ManualWordPressSteps.php';
 require_once 'DatabaseSteps.php';
 require_once 'InstallationSteps.php';

@@ -70,9 +70,7 @@ trait ManualWordPressSteps {
 		$widget_div_id = $widget_div->getAttribute( 'id' );
 		$this->getSession()->wait( 5000, "jQuery('#$widget_div_id .widgets-chooser').length == 1" );
 		$this->get_page()->pressButton( 'Add Widget' );
-		$sidebar = $this->get_page()->find( 'css', '#sidebar-1' );
-		$widget_div    = $sidebar->find( 'xpath', "//div[contains(@id, '$widget_id')]" );
-		$widget_div_id = $widget_div->getAttribute( 'id' );
+    $this->getSession()->wait(10000, '(function(){return jQuery.active == 0})()');
 	}
 
 	/**
@@ -165,15 +163,13 @@ trait ManualWordPressSteps {
 			PHPUnit_Framework_Assert::assertEquals( intval( $rows_hash['number of images'] ), count( $images ) );
 		}
 		$js = "(function(){wrapper=jQuery('.ifttt-instagram-images');return JSON.stringify(jQuery(wrapper).find('img').map(function(){return{width:jQuery(this).innerWidth(),top:jQuery(this).position().top-jQuery(wrapper).position().top,left:jQuery(this).position().left-jQuery(wrapper).position().left};}).get())})();";
-		$result     = $this->getSession()->evaluateScript( $js );
+		$result = $this->getSession()->evaluateScript( $js );
 		$last_idx_in_row = -1;
 		$last_top = -1;
-		$last_row_width  = -1;
+		$last_row_width = -1;
+		error_log(print_r( json_decode( $result, true ),1));
 		foreach ( json_decode( $result, true ) as $image_info ) {
 			$row_width = $image_info['left'] + $image_info['width'];
-			if ( array_key_exists( 'row width <=', $rows_hash ) ) {
-				PHPUnit_Framework_Assert::assertTrue( $row_width <= intval( $rows_hash['row width <='] ), "Row width $row_width not <= " . $rows_hash['row width >='] );
-			}
 			if ( $last_idx_in_row == -1 ) {
 				// first loop
 				$idx_in_row = 0;
@@ -191,9 +187,6 @@ trait ManualWordPressSteps {
 				if ( array_key_exists( 'maximum per row', $rows_hash ) ) {
 					PHPUnit_Framework_Assert::assertTrue( $last_idx_in_row == intval( $rows_hash['maximum per row'] ) - 1, 'Too less images in one row' );
 				}
-				if ( array_key_exists( 'row width >=', $rows_hash ) ) {
-					PHPUnit_Framework_Assert::assertTrue( $last_row_width >= intval( $rows_hash['row width >='] ), "Row width $last_row_width not >= " . $rows_hash['row width >='] );
-				}
 			}
 			$last_idx_in_row = $idx_in_row;
 			$last_top = $image_info['top'];
@@ -208,6 +201,7 @@ trait ManualWordPressSteps {
 	 */
 	public function assert_image_file( $expected_file ) {
 		$div        = $this->get_page()->find( 'css', '.ifttt-instagram-images' );
+		PHPUnit_Framework_Assert::assertNotNull( $div, 'Div not found' );
 		$image      = $div->find( 'css' ,'img' );
 		PHPUnit_Framework_Assert::assertNotNull( $image, 'Image not found' );
 		$image_src  = $image->getAttribute( 'src' );
@@ -221,6 +215,7 @@ trait ManualWordPressSteps {
 	public function assert_image_files( $table ) {
 		$rows   = $table->getRows();
 		$div    = $this->get_page()->find( 'css', '.ifttt-instagram-images' );
+		PHPUnit_Framework_Assert::assertNotNull( $div, 'Div not found' );
 		$images = $div->findAll( 'css' ,'img' );
 		PHPUnit_Framework_Assert::assertEquals( count( $rows ) , count( $images ) );
 		for ( $i = 0; $i < count( $rows ); $i++ ) {
@@ -237,6 +232,7 @@ trait ManualWordPressSteps {
 	public function assert_image_files_different_order( $table ) {
 		$rows   = $table->getRows();
 		$div    = $this->get_page()->find( 'css', '.ifttt-instagram-images' );
+		PHPUnit_Framework_Assert::assertNotNull( $div, 'Div not found' );
 		$images = $div->findAll( 'css' ,'img' );
 		PHPUnit_Framework_Assert::assertEquals( count( $rows ) , count( $images ) );
 		for ( $i = 0; $i < count( $rows ); $i++ ) {

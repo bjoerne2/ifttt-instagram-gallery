@@ -99,8 +99,6 @@ Feature: Display instagram images in widget
     When I go to "/"
     Then I should see images with
       | number of images | <num_of_images> |
-      | row width >=     | 158 |
-      | row width <=     | 162 |
       | maximum per row  | <images_per_row> |
     Examples:
         | num_of_images | images_per_row |

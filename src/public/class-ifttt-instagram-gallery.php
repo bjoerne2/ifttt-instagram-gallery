@@ -340,7 +340,7 @@ class Ifttt_Instagram_Gallery {
 		$defaults = array(
 			'wrapper_width' => false,
 			'images_per_row' => 3,
-			'image_size' => 'thumbnail',
+			'image_size' => 'medium',
 			'random' => false,
 			'num_of_images' => false,
 		);
